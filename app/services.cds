@@ -20,3 +20,5 @@ annotate CatalogService.Books with {
     ID @title : '{i18n>ID}';
 };
 
+
+using from './project2/annotations';
