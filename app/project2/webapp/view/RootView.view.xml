@@ -1,15 +1,10 @@
-<mvc:View
-    controllerName="project2.project2.controller.RootView"
-    xmlns:mvc="sap.ui.core.mvc"
-    displayBlock="true"
-    xmlns="sap.m"
->
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="project2.project2.controller.RootView" displayBlock="true">
 	<Shell id="shell">
 		<App id="app">
 			<pages>
 				<Page id="page" title="{i18n>title}">
 					<content>
-						
+					    <Label id="label0" text="first Label" width="100%"/>
 					</content>
 				</Page>
 			</pages>
