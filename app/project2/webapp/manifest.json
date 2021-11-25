@@ -92,17 +92,17 @@
       "routes": [
         {
           "name": "RouteRootView",
-          "pattern": "RouteRootView",
-          "target": ["TargetRootView"]
+          "pattern": "",
+          "target": "master"
         }
       ],
       "targets": {
-        "TargetRootView": {
+        "master": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "RootView",
-          "viewName": "RootView"
+          "viewId": "Master",
+          "viewName": "Master"
         }
       }
     }
