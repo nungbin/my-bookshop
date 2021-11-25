@@ -2,8 +2,8 @@
 	controllerName="project3.controller.Worklist"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
-
+	xmlns:semantic="sap.f.semantic"
+>
 	<semantic:SemanticPage
 		id="page"
 		headerPinnable="false"
@@ -43,11 +43,11 @@
 				</headerToolbar>
 
 				<columns>
-					<Column id="nameColumn">
-						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+					<Column id="enameColumn">
+						<Text text="{i18n>emailColumn}" id="emailText"/>
 					</Column>
-					<Column id="unitNumberColumn" hAlign="End">
-						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+					<Column id="unitNumberEmail" hAlign="End">
+						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberEmailText"/>
 					</Column>
 				</columns>
 
@@ -57,7 +57,7 @@
 						press=".onPress">
 						<cells>
 							<ObjectIdentifier
-								title="{first_name}"/>
+								title="{email}"/>
 							<ObjectNumber
 								number="{
 									path: '',

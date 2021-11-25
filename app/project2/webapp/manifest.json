@@ -13,7 +13,7 @@
     "ach": "ach",
     "dataSources": {
       "mainService": {
-        "uri": "/mysrvdemoService/",
+        "uri": "/v2/mysrvdemoService/",
         "type": "OData",
         "settings": {
           "odataVersion": "2.0",

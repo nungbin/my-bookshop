@@ -28,7 +28,6 @@ sap.ui.define([
 					//oData.IBAN_CLABE_OTHERS = oModelData.IBAN_CLABE_OTHERS;
 					//that.getView().getModel("trainingModel").setData(oData);  //refresh data on the screen
                     debugger;
-					that.getView().getModel("trainingModel").setData(oModelData); //refresh data on the screen
 				},
 				error: function (oError) {
 					/* do something */
