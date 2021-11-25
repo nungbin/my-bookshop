@@ -4,11 +4,13 @@
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
 	xmlns:smartTable="sap.ui.comp.smarttable"
 	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	controllerName="project2.project2.controller.Master"
 	height="100%">
 		<!-- use this to make the table occupy the available screen height -->
 		<VBox fitContainer="true">
-    		<Label text="Label 1" width="100%" id="label0"/>		
-			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="/StudentSrv" tableType="Table" useExportToExcel="true" beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" header="Line Items" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" class="sapUiResponsiveContentPadding" editTogglable="true" app:useSmartToggle="true">
+    		<Label text="Label 1" width="100%" id="label0"/>
+			<Button xmlns="sap.m" text="Search" id="button0" press=".onClick"/>		
+			<smartTable:SmartTable id="LineItemsSmartTable" entitySet="StudentSrv" tableType="Table" useExportToExcel="true" beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" header="Line Items" showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true" class="sapUiResponsiveContentPadding" editTogglable="true" app:useSmartToggle="true">
 				<!-- layout data used to make the table growing but the filter bar fixed -->
 				<smartTable:layoutData>
 					<FlexItemData growFactor="1" baseSize="0%"/>

@@ -16,7 +16,8 @@
   "scripts": {
     "start": "cds run",
     "watch-project1": "cds watch --open project1/webapp/index.html#fe-lrop-v4",
-    "watch-project2": "cds watch --open project2/webapp/index.html#fe-lrop-v4"
+    "watch-project2": "cds watch --open project2/webapp/index.html#fe-lrop-v4",
+    "watch-project3": "cds watch --open project3/webapp/index.html#fe-lrop-v4"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
@@ -61,6 +62,7 @@
   "sapux": [
     "app/project1",
     "app/project1",
-    "app/project2"
+    "app/project2",
+    "app/project3"
   ]
 }

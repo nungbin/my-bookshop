@@ -1,6 +1,6 @@
 specVersion: '2.4'
 metadata:
-  name: 'project2'
+  name: 'project3'
 type: application
 server:
   customMiddleware:
@@ -10,7 +10,7 @@ server:
       ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
       backend:
       - path: /mysrvdemoService
-        url: http://localhost:4004/v2/mysrvdemoService
+        url: http://localhost:4004
       ui5:
         path: 
         - /resources
@@ -22,18 +22,3 @@ server:
     configuration:
      port: 35729
      path: webapp
-    - name: ui5-middleware-simpleproxy
-    mountPath: /resources/
-    afterMiddleware: compression
-    configuration:
-      baseUri: https://sapui5.hana.ondemand.com/resources/
-  - name: ui5-middleware-simpleproxy
-    mountPath: /resources/
-    afterMiddleware: compression
-    configuration:
-      baseUri: https://sapui5.hana.ondemand.com/resources/
-  - name: ui5-middleware-simpleproxy
-    mountPath: /mysrvdemoService/
-    afterMiddleware: compression
-    configuration:
-      baseUri: http://localhost:4004/v2/mysrvdemoService
