@@ -4,6 +4,11 @@
 	        <Button icon="sap-icon://action" tooltip="Share" id="button0"/>
 	    </headerContent>
 	    <content>
+			<VBox id="vbox2">
+				<Input width="100%" id="inputMyFooBar" value="Hi"/>
+				<Button text="{i18n>MasterView.ClickToCallMyFooBar}" width="auto" id="__button0" press=".onClickCallMyFooBar"/>
+				<Label text="" id="labelMyFooBar"/>
+			</VBox>
 	        <VBox id="vbox0">
 	            <Text text=""/>
                 <smartFilterBar:SmartFilterBar id="smartFilterBar" 

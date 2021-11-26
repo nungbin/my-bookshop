@@ -9,8 +9,8 @@ sap.ui.define([
 
 	return Controller.extend("project2.project2.controller.Master", {
         onInit: function () {
-            this._defaultODataModel = this.getOwnerComponent().getModel();
-            debugger;
+            this._defaultODataModel  = this.getOwnerComponent().getModel();
+			this._categoryODataModel = this.getOwnerComponent().getModel("categoryModel");
         },
 
         onClick: function (oEvent) {
@@ -34,6 +34,30 @@ sap.ui.define([
 					debugger;
 				}
 			});            
-        }
+        },
+
+		onClickCallMyFooBar: function(oEvent) {
+			let that = this;
+			let valueMyFooBar = this.getView().byId("inputMyFooBar").getValue();
+			let url=`/mysrvdemoService/myfoobar(msg='${valueMyFooBar}')`; //this is a REST API call
+
+			$.ajax({
+				url: url,
+				type: 'GET',
+				//data: $.param({msg: "Hi"}),
+				contentType: "application/json",
+				dataType: "json",
+				async: false,				
+				success: function(data){
+					debugger;
+					//console.log("success"+data);
+					that.getView().byId("labelMyFooBar").setText(data.value);
+				},
+				error: function(e){
+					debugger;
+					console.log("error: "+e);
+				}
+			  });
+		}
 	});
 });

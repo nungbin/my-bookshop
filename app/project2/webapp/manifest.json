@@ -19,6 +19,14 @@
           "odataVersion": "2.0",
           "localUri": "localService/metadata.xml"
         }
+      },
+      "categoryService": {
+        "uri": "/v2/mysrvdemoService/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
       }
 		}
   },
@@ -70,7 +78,11 @@
 			"": {
 				"dataSource": "mainService",
 				"preload": true
-			}
+			},
+      "categoryModel": {
+				"dataSource": "categoryService",
+				"preload": true
+      }
     },
     "resources": {
       "css": [
