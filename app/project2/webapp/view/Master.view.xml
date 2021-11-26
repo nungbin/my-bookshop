@@ -1,34 +1,64 @@
-<mvc:View
-	controllerName="project2.project2.controller.Master"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-	xmlns:smartTable="sap.ui.comp.smarttable">
-	<smartFilterBar:SmartFilterBar
-		id="smartFilterBar"
-		entitySet="StudentSrv"
-		persistencyKey="SmartFilterPKey">
-		<smartFilterBar:controlConfiguration>
-			<smartFilterBar:ControlConfiguration
-				key="Category"
-				visibleInAdvancedArea="true"
-				preventInitialDataFetchInValueHelpDialog="false">
-			</smartFilterBar:ControlConfiguration>
-		</smartFilterBar:controlConfiguration>
-	</smartFilterBar:SmartFilterBar>
-	<smartTable:SmartTable
-		id="smartTable_ResponsiveTable"
-		smartFilterId="smartFilterBar"
-		tableType="ResponsiveTable"
-		editable="false"
-		entitySet="StudentSrv"
-		useVariantManagement="true"
-		useTablePersonalisation="true"
-		header="Products"
-		showRowCount="true"
-		useExportToExcel="false"
-		enableAutoBinding="true"
-		persistencyKey="SmartTablePKey"
-		enableAutoColumnWidth="true">
-	</smartTable:SmartTable>
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable" controllerName="project2.project2.controller.Master">
+	<Page xmlns="sap.m" id="pageId" title="Page Title" floatingFooter="true">
+	    <headerContent>
+	        <Button icon="sap-icon://action" tooltip="Share" id="button0"/>
+	    </headerContent>
+	    <content>
+	        <VBox id="vbox0">
+	            <Text text=""/>
+                <smartFilterBar:SmartFilterBar id="smartFilterBar" 
+				                               entitySet="StudentSrv" 
+											   persistencyKey="SmartFilterPKey">
+                    <smartFilterBar:controlConfiguration>
+                        <smartFilterBar:ControlConfiguration key="Category" 
+						                                     visibleInAdvancedArea="true" 
+															 preventInitialDataFetchInValueHelpDialog="false">
+                        </smartFilterBar:ControlConfiguration>
+                    </smartFilterBar:controlConfiguration>
+                </smartFilterBar:SmartFilterBar>
+                <smartTable:SmartTable id="smartTable_ResponsiveTable" 
+				                       smartFilterId="smartFilterBar" 
+									   tableType="ResponsiveTable" 
+									   editable="false" 
+									   entitySet="StudentSrv" 
+									   useVariantManagement="true" 
+									   useTablePersonalisation="true" 
+									   header="Students" 
+									   showRowCount="true" 
+									   useExportToExcel="false" 
+									   enableAutoBinding="true" 
+									   persistencyKey="SmartTablePKey" 
+									   enableAutoColumnWidth="true">
+                </smartTable:SmartTable>	            
+	        </VBox>
+	        <VBox id="vbox1">
+	            <Text text="Second VBox"/>
+				<List
+					items="{/StudentSrv}"
+					headerText="Students"
+					growing="true"
+					growingThreshold="4"
+					growingScrollToLoad="false">
+					<items>
+						<CustomListItem>
+							<FlexBox justifyContent="SpaceBetween">
+								<Text text="{email}"/>
+								<CheckBox/>
+							</FlexBox>
+							<FlexBox justifyContent="SpaceBetween">
+								<Text text="{first_name}"/>
+								<CheckBox/>
+							</FlexBox>
+						</CustomListItem>
+					</items>
+				</List>
+	        </VBox>
+	    </content>
+	    <footer>
+	        <OverflowToolbar id="toolbar2">
+	            <ToolbarSpacer/>
+	            <Button type="Accept" text="Accept" visible="false"/>
+	        </OverflowToolbar>
+	    </footer>
+	</Page>
 </mvc:View>

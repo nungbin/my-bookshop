@@ -6,7 +6,8 @@ async function _readStudentSrv(req) {
     const { StudentSrv } = this.entities
     const ltabStudents = await cds.transaction(req).run(SELECT .from(StudentSrv))
     if (ltabStudents.length > 0 ) {
-        ltabStudents[0].email = '2@gmail.com'
+        //grey out the blow line for now in order to avoid confusion on the result
+        //ltabStudents[0].email = '2@gmail.com'
         // $count has to be assigned or returned result will not dipslay. 'result.js' shows why.
         // https://answers.sap.com/questions/13084938/how-can-i-implement-counttrue-support-with-an-exte.html
         ltabStudents.$count = ltabStudents.length
