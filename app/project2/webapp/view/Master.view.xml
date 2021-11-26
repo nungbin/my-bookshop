@@ -1,19 +1,21 @@
 <mvc:View xmlns="sap.m" 
-          xmlns:mvc="sap.ui.core.mvc" 
-		  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
-		  xmlns:smartTable="sap.ui.comp.smarttable" 
+		xmlns:l="sap.ui.layout"
+		xmlns:f="sap.ui.layout.form"
+		xmlns:mvc="sap.ui.core.mvc"
+  	    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+		xmlns:smartTable="sap.ui.comp.smarttable" 
 		  controllerName="project2.project2.controller.Master">
 	<Page xmlns="sap.m" id="pageId" title="Page Title" floatingFooter="true">
 	    <headerContent>
 	        <Button icon="sap-icon://action" tooltip="Share" id="button0"/>
 	    </headerContent>
 	    <content>
-			<VBox id="vbox2">
+			<VBox id="vbox2" class="sapUiSmallMargin">
 				<Input width="100%" id="inputMyFooBar" value="Hi"/>
 				<Button text="{i18n>MasterView.ClickToCallMyFooBar}" width="auto" id="__button0" press=".onClickCallMyFooBar"/>
 				<Label text="" id="labelMyFooBar"/>
 			</VBox>
-	        <VBox id="vbox0">
+	        <VBox id="vbox0" class="sapUiSmallMargin">
 	            <Text text=""/>
                 <smartFilterBar:SmartFilterBar id="smartFilterBar" 
 				                               entitySet="StudentSrv" 
@@ -40,7 +42,7 @@
 									   enableAutoColumnWidth="true">
                 </smartTable:SmartTable>	            
 	        </VBox>
-	        <VBox id="vbox1">
+	        <VBox id="vbox1" class="sapUiSmallMargin">
 	            <Text text="Second VBox"/>
 				<List
 					items="{/StudentSrv}"
@@ -62,8 +64,30 @@
 					</items>
 				</List>
 	        </VBox>
-			<VBox id="vbox3">
-				<Button text="{i18n>MasterView.TestCatalogService}" width="auto" press=".onClick"/>				
+			<VBox id="vbox3" class="sapUiSmallMargin">
+				<Button text="{i18n>MasterView.TestCatalogService}" width="auto" press=".onClick"/>
+				<f:SimpleForm
+					id="sfBooks"
+					layout="ResponsiveLayout"
+					title="One book"
+					editable="false"
+					width="auto"
+				>
+					<f:content>
+						<Label text="Book ID" />
+						<Input value="{bookModel>ID}" />
+						<Label text="Book title" />
+						<Input value="{bookModel>title}" />
+						<Label text="Book author ID" />
+						<Input value="{bookModel>author_ID}" />
+						<Label text="Stock" />
+						<Input value="{bookModel>stock}" />
+					</f:content>
+					<f:title>
+					</f:title>
+					<f:toolbar>
+					</f:toolbar>
+				</f:SimpleForm>
 			</VBox>
 	    </content>
 	    <footer>
