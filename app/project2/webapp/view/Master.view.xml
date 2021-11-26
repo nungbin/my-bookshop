@@ -1,4 +1,8 @@
-<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:smartTable="sap.ui.comp.smarttable" controllerName="project2.project2.controller.Master">
+<mvc:View xmlns="sap.m" 
+          xmlns:mvc="sap.ui.core.mvc" 
+		  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+		  xmlns:smartTable="sap.ui.comp.smarttable" 
+		  controllerName="project2.project2.controller.Master">
 	<Page xmlns="sap.m" id="pageId" title="Page Title" floatingFooter="true">
 	    <headerContent>
 	        <Button icon="sap-icon://action" tooltip="Share" id="button0"/>
@@ -58,6 +62,9 @@
 					</items>
 				</List>
 	        </VBox>
+			<VBox id="vbox3">
+				<Button text="{i18n>MasterView.TestCatalogService}" width="auto" press=".onClick"/>				
+			</VBox>
 	    </content>
 	    <footer>
 	        <OverflowToolbar id="toolbar2">

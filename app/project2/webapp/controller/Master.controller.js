@@ -11,16 +11,22 @@ sap.ui.define([
         onInit: function () {
             this._defaultODataModel  = this.getOwnerComponent().getModel();
 			this._categoryODataModel = this.getOwnerComponent().getModel("categoryModel");
+			//Load JSON from a file
+			this._personJSONModel    = this.getOwnerComponent().getModel("personDataModel");
+			let _personJSON          = this._personJSONModel.getData();
+			_personJSON = Object.assign(_personJSON, { } );
+
+			debugger;
         },
 
         onClick: function (oEvent) {
-            MessageToast.show("get Clicked");
+            //MessageToast.show("get Clicked");
 
-            var sPath = "/StudentSrv";
+            var sPath = "/Books";
             var that = this;
             debugger;
 
-			this._defaultODataModel.read(sPath, {
+			this._categoryODataModel.read(sPath, {
 				success: function (oModelData, oResponse) {
 					/* do something */
 					//var oData = that.getView().getModel("trainingModel").getData();

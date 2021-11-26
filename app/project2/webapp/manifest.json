@@ -21,13 +21,17 @@
         }
       },
       "categoryService": {
-        "uri": "/v2/mysrvdemoService/",
+        "uri": "/v2/catalog/",
         "type": "OData",
         "settings": {
           "odataVersion": "2.0",
           "localUri": "localService/metadata.xml"
         }
-      }
+      },
+      "personData_alias":{
+				"uri": "model/personData.json",
+				"type": "JSON"
+			}      
 		}
   },
   "sap.ui": {
@@ -82,7 +86,12 @@
       "categoryModel": {
 				"dataSource": "categoryService",
 				"preload": true
-      }
+      },
+			"personDataModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"dataSource": "personData_alias",
+        "preload": true
+			}	      
     },
     "resources": {
       "css": [
