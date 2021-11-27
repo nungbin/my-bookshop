@@ -67,8 +67,7 @@ sap.ui.define([
 						oData = Object.assign(oData, oModelData.results[0]);
 						that.getView().getModel("bookModel").setData(oData);
 						//Bind result to the simple form
-						var oProductDetailPanel = that.getView().byId("sfBooks");
-						oProductDetailPanel.bindElement({ path: "/", model: "bookModel" });
+						that.getView().byId("sfBooks").bindElement({ path: "/", model: "bookModel" });
 					}
 				},
 				error: function (oError) {
