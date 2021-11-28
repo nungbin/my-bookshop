@@ -1,0 +1,29 @@
+<mvc:View xmlns:smartfield="sap.ui.comp.smartfield" 
+	xmlns:smartform="sap.ui.comp.smartform"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+	controllerName="project2.project2.controller.Detail"
+>
+	<Shell>
+		<App>
+			<pages>
+				<Page id="detailPage" title="Student Information" showNavButton="true" navButtonPress=".onNavPress">
+					<content>
+						<smartform:SmartForm id="sfDetail">
+							<smartform:Group label="Student">
+								<smartform:GroupElement>
+									<smartfield:SmartField value="{email}">
+									</smartfield:SmartField>
+								</smartform:GroupElement>
+							</smartform:Group>
+						</smartform:SmartForm>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

@@ -99,6 +99,17 @@ sap.ui.define([
 					console.log("error: "+e);
 				}
 			  });
+		},
+
+		onRowPress: function() {
+			//learned from https://youtu.be/fTmn8Z6j2Ns?t=1838
+			var oTable = this.getView().byId("oTable");
+			var eMail  = oTable.getSelectedItem().getBindingContext().getProperty("email");
+			this.getOwnerComponent().getRouter().navTo("detail", {
+				email: eMail
+			});
+			//oEvent.getParameter("listItem").getBindingContext().getProperty("email");
+			//oEvent.getParameter("listItem").getBindingContext().getProperty("first_name");
 		}
 	});
 });

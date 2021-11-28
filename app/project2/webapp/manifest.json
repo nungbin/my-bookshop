@@ -115,7 +115,12 @@
           "name": "RouteRootView",
           "pattern": "",
           "target": "master"
-        }
+        },
+        {
+          "pattern": "detail/{email}",
+          "name": "detail",
+          "target": "detail"
+        }        
       ],
       "targets": {
         "master": {
@@ -124,7 +129,12 @@
           "clearControlAggregation": false,
           "viewId": "Master",
           "viewName": "Master"
-        }
+        },
+        "detail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewName": "Detail"
+        }        
       }
     }
   }
