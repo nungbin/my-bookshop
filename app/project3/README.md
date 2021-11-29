@@ -1,15 +1,15 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Thu Nov 25 2021 13:56:59 GMT-0700 (Mountain Standard Time)|
+|**Generation Date and Time**<br>Sun Nov 28 2021 20:36:40 GMT-0700 (Mountain Standard Time)|
 |**App Generator**<br>@sap/generator-fiori|
 |**App Generator Version**<br>1.3.6|
 |**Generation Platform**<br>Visual Studio Code|
 |**Floorplan Used**<br>3worklistodatav4|
 |**Service Type**<br>Local Cap|
-|**Service URL**<br>/mysrvdemoService/
+|**Service URL**<br>/catalog/
 |**Module Name**<br>project3|
-|**Application Title**<br>App Title|
+|**Application Title**<br>Books|
 |**Namespace**<br>|
 |**UI5 Theme**<br>sap_fiori_3|
 |**UI5 Version**<br>Latest|

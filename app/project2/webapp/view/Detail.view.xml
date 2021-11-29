@@ -8,22 +8,34 @@
 	busyIndicatorDelay="0"
 	controllerName="project2.project2.controller.Detail"
 >
-	<Shell>
-		<App>
-			<pages>
-				<Page id="detailPage" title="Student Information" showNavButton="true" navButtonPress=".onNavPress">
-					<content>
-						<smartform:SmartForm id="sfDetail">
-							<smartform:Group label="Student">
-								<smartform:GroupElement>
-									<smartfield:SmartField value="{email}">
-									</smartfield:SmartField>
-								</smartform:GroupElement>
-							</smartform:Group>
-						</smartform:SmartForm>
-					</content>
-				</Page>
-			</pages>
-		</App>
-	</Shell>
+	<Page id="detailPage" title="Student Information" showNavButton="true" navButtonPress=".onNavPress">
+		<content>
+			<smartform:SmartForm id="sfDetail"
+			                     layout="ResponsiveLayout"
+								 title="Student Detail">
+				<smartform:layout>
+					<smartform:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/>
+				</smartform:layout>
+
+				<smartform:Group>
+					<smartform:GroupElement label="Student">
+						<smartfield:SmartField value="{email}">
+						</smartfield:SmartField>
+					</smartform:GroupElement>
+					<smartform:GroupElement label="First Name">
+						<smartfield:SmartField value="{first_name}">
+						</smartfield:SmartField>
+					</smartform:GroupElement>
+					<smartform:GroupElement label="Last Name">
+						<smartfield:SmartField value="{last_name}">
+						</smartfield:SmartField>
+					</smartform:GroupElement>
+					<smartform:GroupElement label="Date signed up">
+						<smartfield:SmartField value="{date_sign_up}">
+						</smartfield:SmartField>
+					</smartform:GroupElement>
+				</smartform:Group>
+			</smartform:SmartForm>
+		</content>
+	</Page>
 </mvc:View>

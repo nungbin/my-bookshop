@@ -62,7 +62,7 @@ sap.ui.define([
 		 */
 		_onObjectMatched : function (oEvent) {
 			var sObjectId =  oEvent.getParameter("arguments").objectId;
-			this._bindView("/StudentSrv" + sObjectId);
+			this._bindView("/Books" + sObjectId);
 		},
 
 		/**
@@ -102,8 +102,8 @@ sap.ui.define([
 			var oResourceBundle = this.getResourceBundle();
 
 			oView.getBindingContext().requestObject().then((function (oObject) {
-				var sObjectId = oObject.email,
-					sObjectName = oObject.first_name;
+				var sObjectId = oObject.ID,
+					sObjectName = oObject.author_ID;
 
 
 				oViewModel.setProperty("/busy", false);

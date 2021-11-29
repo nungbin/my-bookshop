@@ -2,8 +2,8 @@
 	controllerName="project3.controller.Worklist"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic"
->
+	xmlns:semantic="sap.f.semantic">
+
 	<semantic:SemanticPage
 		id="page"
 		headerPinnable="false"
@@ -18,9 +18,9 @@
 				id="table"
 				width="auto"
 				items="{
-					path: '/StudentSrv',
+					path: '/Books',
 					sorter: {
-						path: 'first_name',
+						path: 'author_ID',
 						descending: false
 					}
 				}"
@@ -43,11 +43,11 @@
 				</headerToolbar>
 
 				<columns>
-					<Column id="enameColumn">
-						<Text text="{i18n>emailColumn}" id="emailText"/>
+					<Column id="nameColumn">
+						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
 					</Column>
-					<Column id="unitNumberEmail" hAlign="End">
-						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberEmailText"/>
+					<Column id="unitNumberColumn" hAlign="End">
+						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
 					</Column>
 				</columns>
 
@@ -57,7 +57,7 @@
 						press=".onPress">
 						<cells>
 							<ObjectIdentifier
-								title="{email}"/>
+								title="{author_ID}"/>
 							<ObjectNumber
 								number="{
 									path: '',

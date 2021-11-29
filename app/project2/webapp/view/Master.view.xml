@@ -10,10 +10,12 @@
 	        <Button icon="sap-icon://action" tooltip="Share" id="button0"/>
 	    </headerContent>
 	    <content>
-			<VBox id="vbox2" class="sapUiSmallMargin">
-				<Input width="100%" id="inputMyFooBar" value="Hi"/>
-				<Button text="{i18n>MasterView.ClickToCallMyFooBar}" width="auto" id="__button0" press=".onClickCallMyFooBar"/>
-				<Label text="" id="labelMyFooBar"/>
+			<VBox id="vbox2" class="sapUiSmallMargin" visible="{personDataModel>/visibleControl}">
+				<Input width="100%" id="inputMyFooBar" value="Hi" visible="{personDataModel>/visibleControl}"/>
+				<Button text="{i18n>MasterView.ClickToCallMyFooBar}" width="auto" id="__button0" 
+				        press=".onClickCallMyFooBar"
+						visible="{personDataModel>/visibleControl}"/>
+				<Label text="" id="labelMyFooBar" visible="{personDataModel>/visibleControl}"/>
 			</VBox>
 	        <VBox id="vbox0" class="sapUiSmallMargin">
 	            <Text text=""/>
@@ -29,32 +31,35 @@
                 </smartFilterBar:SmartFilterBar>
                 <smartTable:SmartTable id="smartTable_ResponsiveTable" 
 				                       smartFilterId="smartFilterBar" 
-									   tableType="ResponsiveTable" 
+									   tableType="Table" 
 									   editable="false" 
 									   entitySet="StudentSrv" 
 									   useVariantManagement="true" 
 									   useTablePersonalisation="true" 
 									   header="Students" 
 									   showRowCount="true" 
-									   useExportToExcel="false" 
+									   useExportToExcel="true" 
 									   enableAutoBinding="true" 
-									   persistencyKey="SmartTablePKey" 
-									   enableAutoColumnWidth="true">
+									   persistencyKey="SmartTablePKey"> 
+					<!-- layout data used to make the table growing but the filter bar fixed -->
+
 					<Table
 					    selectionChange=".onRowPress"
 						mode="SingleSelectMaster"
 						id="oTable"
 					/>
+
                 </smartTable:SmartTable>	            
 	        </VBox>
 	        <VBox id="vbox1" class="sapUiSmallMargin">
-	            <Text text="Second VBox"/>
+	            <Text text="Second VBox" visible="{personDataModel>/visibleControl}"/>
 				<List
 					items="{/StudentSrv}"
 					headerText="Students"
 					growing="true"
 					growingThreshold="4"
-					growingScrollToLoad="false">
+					growingScrollToLoad="false"
+					visible="{personDataModel>/visibleControl}">
 					<items>
 						<CustomListItem>
 							<FlexBox justifyContent="SpaceBetween">
@@ -69,8 +74,9 @@
 					</items>
 				</List>
 	        </VBox>
-			<VBox id="vbox3" class="sapUiSmallMargin">
-				<Button text="{i18n>MasterView.TestCatalogService}" width="auto" press=".onClick"/>
+			<VBox id="vbox3" class="sapUiSmallMargin" visible="{personDataModel>/visibleControl}">
+				<Button text="{i18n>MasterView.TestCatalogService}" width="auto" 
+				        press=".onClick"/>
 				<f:SimpleForm
 					id="sfBooks"
 					layout="ResponsiveLayout"
@@ -96,7 +102,7 @@
 			</VBox>
 	    </content>
 	    <footer>
-	        <OverflowToolbar id="toolbar2">
+	        <OverflowToolbar id="toolbar2" visible="{personDataModel>/visibleControl}">
 	            <ToolbarSpacer/>
 	            <Button type="Accept" text="Accept" visible="false"/>
 	        </OverflowToolbar>

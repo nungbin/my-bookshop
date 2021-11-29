@@ -98,7 +98,7 @@ sap.ui.define([
 				var sQuery = oEvent.getParameter("query");
 
 				if (sQuery && sQuery.length > 0) {
-					aTableSearchState = [new Filter("first_name", FilterOperator.Contains, sQuery)];
+					aTableSearchState = [new Filter("author_ID", FilterOperator.Contains, sQuery)];
 				}
 				this._applySearch(aTableSearchState);
 			}
@@ -130,8 +130,8 @@ sap.ui.define([
 
 			oItem.getBindingContext().requestCanonicalPath().then(function (sObjectPath) {
 				that.getRouter().navTo("object", {
-					objectId_Old: oItem.getBindingContext().getProperty("email"),
-					objectId : sObjectPath.slice("/StudentSrv".length) // /Products(3)->(3)
+					objectId_Old: oItem.getBindingContext().getProperty("ID"),
+					objectId : sObjectPath.slice("/Books".length) // /Products(3)->(3)
 				});
 			});
 		},

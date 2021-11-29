@@ -18,8 +18,7 @@ sap.ui.define([
             //http://localhost:4004/mysrvdemoService/StudentSrv(email='2@gmail.com')
             let eMail = oEvent.getParameter("arguments").email;
             //below statement makes another oData call
-            //this.getView().bindElement("/StudentSrv(email='" + eMail + "')");
-            this.getView().byId("sfDetail").bindElement("/StudentSrv(email='" + eMail + "')");
+            this.getView().bindElement("/StudentSrv(email='" + eMail + "')");
         },
 
         onNavPress: function() {
