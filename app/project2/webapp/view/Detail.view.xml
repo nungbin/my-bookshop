@@ -12,13 +12,13 @@
 		<content>
 			<smartform:SmartForm id="sfDetail"
 			                     layout="ResponsiveLayout"
-								 title="Student Detail">
+								 title="{i18n>DetailView.StudentDetail}">
 				<smartform:layout>
 					<smartform:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/>
 				</smartform:layout>
 
 				<smartform:Group>
-					<smartform:GroupElement label="Student">
+					<smartform:GroupElement label="Email">
 						<smartfield:SmartField value="{email}">
 						</smartfield:SmartField>
 					</smartform:GroupElement>

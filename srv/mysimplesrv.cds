@@ -23,19 +23,19 @@ annotate lms.Students with @(
         LineItem: [
             {
                 Value : email,
-                Label : 'email'
+                Label : '{i18n>email}'
             },
             {
                 Value : first_name,
-                Label : 'first_name'
+                Label : '{i18n>first_name}'
             },
             {
                 Value : last_name,
-                Label : 'last_name'
+                Label : '{i18n>last_name}'
             },
             {
                 Value : date_sign_up,
-                Label : 'date_sign_up'
+                Label : '{i18n>date_sign_up}'
             }            
         ],
     }

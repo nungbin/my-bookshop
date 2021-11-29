@@ -45,6 +45,9 @@
     }
   },
   "cds": {
+    "i18n":{
+      "folders": [ "_i18n", "i18n", " assets/i18n" ]
+    },
     "requires": {
       "db": {
         "kind": "sqlite",
