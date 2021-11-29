@@ -28,8 +28,8 @@
           "localUri": "localService/metadata.xml"
         }
       },
-      "personData_alias":{
-				"uri": "model/personData.json",
+      "UIControl_alias":{
+				"uri": "model/UIControl.json",
 				"type": "JSON"
 			}      
 		}
@@ -87,9 +87,9 @@
 				"dataSource": "categoryService",
 				"preload": true
       },
-			"personDataModel": {
+			"UIControlModel": {
 				"type": "sap.ui.model.json.JSONModel",
-				"dataSource": "personData_alias",
+				"dataSource": "UIControl_alias",
         "preload": true
 			}	      
     },

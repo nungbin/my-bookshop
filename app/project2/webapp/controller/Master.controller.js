@@ -14,7 +14,8 @@ sap.ui.define([
             this._defaultODataModel  = this.getOwnerComponent().getModel();
 			this._categoryODataModel = this.getOwnerComponent().getModel("categoryModel");
 			//Load JSON from a file
-			this._bookJSONModel      = this.getOwnerComponent().getModel("personDataModel");
+			this._UIControlJSONModel = this.getOwnerComponent().getModel("UIControlModel");
+			this._UIControlJSONModel.setProperty("/visibleControl", true)
 			//this.getView().setModel(this._bookJSONModel, "bookModel");
 
 			// learned this from Vivek
@@ -29,7 +30,6 @@ sap.ui.define([
 		_onMetadataLoaded: function () {
 			// Fetching MetaModel from the OData model once metadata is loaded from 
 			//    this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
-			debugger;
 			var oMetaData = this._categoryODataModel.getServiceMetadata(),
 				// iterate through array. common technique used in Javascript
 				oEntityType = oMetaData.dataServices.schema[0].entityType.filter(function (oItem) {
@@ -39,17 +39,15 @@ sap.ui.define([
 						return oItem;
 					}
 				});
-				//_personJSON        = this._personJSONModel.getData();
 
 				//_personJSON = Object.assign(_personJSON, obj);	
 				//oEntityType[0].property.forEach(element => {  _personJSON[element.name] = ""; });
 
-				//tCategoryJSONModel = new sap.ui.model.json.JSONModel({
-				//	  "": oEntityType[0].property
-				//}),
-
-				//let _bookJSONModel = new JSONModel(_personJSON);
-				//this.getView().setModel(_bookJSONModel, "bookModel");
+				//Initialize a JSON model based on meta data
+				this._bookJSONModel = new sap.ui.model.json.JSONModel({
+  				  "": oEntityType[0].property
+				});
+				this.getOwnerComponent().setModel(this._bookJSONModel, "bookModel")
 		},	
 
         onClick: function (oEvent) {
@@ -70,13 +68,13 @@ sap.ui.define([
 						// //Bind result to the simple form
 						// that.getView().byId("sfBooks").bindElement({ path: "/", model: "bookModel" });
 
-						let oData = that._bookJSONModel.getData();
-						//Below statement acts similar to ABAP's MOVE-CORRESPONDING
-						oData = Object.assign(oData, oModelData.results[0]);
-						that._bookJSONModel.setData(oData);
+						// let oData = that._bookJSONModel.getData();
+						// //Below statement acts similar to ABAP's MOVE-CORRESPONDING
+						// oData = Object.assign(oData, oModelData.results[0]);
+						that._bookJSONModel.setData(oModelData.results[0]);
 
 						// //Bind result to the simple form
-						that.getView().byId("sfBooks").bindElement({ path: "/", model: "personDataModel" });
+						that.getView().byId("sfBooks").bindElement({ path: "/", model: "bookModel" });
 					}
 				},
 				error: function (oError) {
@@ -89,7 +87,6 @@ sap.ui.define([
 			let that = this;
 			let valueMyFooBar = this.getView().byId("inputMyFooBar").getValue();
 			let url=`/mysrvdemoService/myfoobar(msg='${valueMyFooBar}')`; //this is a REST API call
-
 			$.ajax({
 				url: url,
 				type: 'GET',

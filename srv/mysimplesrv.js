@@ -21,14 +21,14 @@ function _myFoobar(req, res) {
 }
 
 // const mysrvdemo = function(srv) {
-//     srv.on("myfoobar", _myFoobar)
-
-//     //http://localhost:4004/mysrvdemoService/myfoobar(msg='Hi')
 //     //Below method(.on) is to override the default Service implementation
 //      srv.on('READ', 'StudentSrv', _readStudentSrv)
 // }
 
 const mysrvdemo = function (srv) {
+// http://localhost:4004/mysrvdemoService/myfoobar(msg='Hi')
+  srv.on("myfoobar", _myFoobar)
+
 //  srv.after("READ", "StudentSrv", (each) => {
 //    //console.log("Read students");
 //    // if (each.stock > 111)  each.title += ' -- 11% discount!'
