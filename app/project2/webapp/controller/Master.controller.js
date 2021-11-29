@@ -15,11 +15,11 @@ sap.ui.define([
 			this._categoryODataModel = this.getOwnerComponent().getModel("categoryModel");
 			//Load JSON from a file
 			this._bookJSONModel      = this.getOwnerComponent().getModel("personDataModel");
-			this.getView().setModel(this._bookJSONModel, "bookModel");
+			//this.getView().setModel(this._bookJSONModel, "bookModel");
 
 			// learned this from Vivek
 			// at this point, Odata call isn't made yet since it's async.
-			//this._categoryODataModel.metadataLoaded().then(this._onMetadataLoaded.bind(this));
+			this._categoryODataModel.metadataLoaded().then(this._onMetadataLoaded.bind(this));
 		},
 
 		// this is triggered by, to ensure metadata gets loaded
@@ -29,6 +29,7 @@ sap.ui.define([
 		_onMetadataLoaded: function () {
 			// Fetching MetaModel from the OData model once metadata is loaded from 
 			//    this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+			debugger;
 			var oMetaData = this._categoryODataModel.getServiceMetadata(),
 				// iterate through array. common technique used in Javascript
 				oEntityType = oMetaData.dataServices.schema[0].entityType.filter(function (oItem) {
@@ -60,19 +61,26 @@ sap.ui.define([
 					//oData.BIC = oModelData.BIC;
 					//oData.IBAN_CLABE_OTHERS = oModelData.IBAN_CLABE_OTHERS;
 					//that.getView().getModel("trainingModel").setData(oData);  //refresh data on the screen
-					debugger;
+
 					if ( oModelData.results.length >= 1 ) {
-						let oData = that.getView().getModel("bookModel").getData();
+						// let oData = that.getView().getModel("bookModel").getData();
+						// //Below statement acts similar to ABAP's MOVE-CORRESPONDING
+						// oData = Object.assign(oData, oModelData.results[0]);
+						// that.getView().getModel("bookModel").setData(oData);
+						// //Bind result to the simple form
+						// that.getView().byId("sfBooks").bindElement({ path: "/", model: "bookModel" });
+
+						let oData = that._bookJSONModel.getData();
 						//Below statement acts similar to ABAP's MOVE-CORRESPONDING
 						oData = Object.assign(oData, oModelData.results[0]);
-						that.getView().getModel("bookModel").setData(oData);
-						//Bind result to the simple form
-						that.getView().byId("sfBooks").bindElement({ path: "/", model: "bookModel" });
+						that._bookJSONModel.setData(oData);
+
+						// //Bind result to the simple form
+						that.getView().byId("sfBooks").bindElement({ path: "/", model: "personDataModel" });
 					}
 				},
 				error: function (oError) {
-					MessageToast.show(this.getBundle().getText("MasterController.ERRORUnableToRetrieveABook"));
-					debugger;
+					MessageToast.show(that.getBundle().getText("MasterController.ERRORUnableToRetrieveABook"));
 				}
 			});            
         },

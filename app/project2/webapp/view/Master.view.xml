@@ -86,13 +86,13 @@
 				>
 					<f:content>
 						<Label text="Book ID" />
-						<Input value="{bookModel>ID}" />
+						<Input value="{personDataModel>ID}" />
 						<Label text="Book title" />
-						<Input value="{bookModel>title}" />
+						<Input value="{personDataModel>title}" />
 						<Label text="Book author ID" />
-						<Input value="{bookModel>author_ID}" />
+						<Input value="{personDataModel>author_ID}" />
 						<Label text="Stock" />
-						<Input value="{bookModel>stock}" />
+						<Input value="{personDataModel>stock}" />
 					</f:content>
 					<f:title>
 					</f:title>
