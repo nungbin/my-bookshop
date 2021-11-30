@@ -15,7 +15,7 @@ sap.ui.define([
 			this._categoryODataModel = this.getOwnerComponent().getModel("categoryModel");
 			//Load JSON from a file
 			this._UIControlJSONModel = this.getOwnerComponent().getModel("UIControlModel");
-			this._UIControlJSONModel.setProperty("/visibleControl", true)
+			this._UIControlJSONModel.setProperty("/visibleControl", false)
 			//this.getView().setModel(this._bookJSONModel, "bookModel");
 
 			// learned this from Vivek

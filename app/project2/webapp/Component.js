@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"project2/project2/model/models"
-], function (UIComponent, Device, models) {
+	"project2/project2/model/models",
+	"sap/ui/fl/FakeLrepConnectorLocalStorage"	
+], function (UIComponent, Device, models, FakeLrepConnectorLocalStorage) {
 	"use strict";
 
 	return UIComponent.extend("project2.project2.Component", {
@@ -17,6 +18,7 @@ sap.ui.define([
 		 * @override
 		 */
 		init: function () {
+			FakeLrepConnectorLocalStorage.enableFakeConnector(sap.ui.require.toUrl("sap/ui/demo/smartControls/lrep/component-test-changes.json"));
 			// call the base component's init function
 			UIComponent.prototype.init.apply(this, arguments);
 
@@ -25,6 +27,10 @@ sap.ui.define([
 
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
-		}
+		},
+        destroy: function () {
+            FakeLrepConnectorLocalStorage.disableFakeConnector();
+            UIComponent.prototype.destroy.apply(this, arguments);
+        }		
 	});
 });
