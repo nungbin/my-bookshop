@@ -45,17 +45,16 @@
     }
   },
   "cds": {
-    "i18n":{
-      "folders": [ "_i18n", "i18n", " assets/i18n" ]
+    "i18n": {
+      "folders": [
+        "_i18n",
+        "i18n",
+        " assets/i18n"
+      ]
     },
     "requires": {
       "db": {
         "kind": "sqlite",
-        "model": [
-          "db/",
-          "srv/",
-          "app/"
-        ],
         "credentials": {
           "database": "db/my-bookshop.db"
         }
@@ -64,9 +63,7 @@
   },
   "sapux": [
     "app/project1",
-    "app/project1",
     "app/project2",
-    "app/project3",
     "app/project3"
   ]
 }

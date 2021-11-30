@@ -35,7 +35,7 @@
 									   class="sapUiSizeCompact"
 				                       smartFilterId="smartFilterBar" 
 									   placeToolbarInTable="true"
-									   tableType="Table" 
+									   tableType="ResponsiveTable" 
 									   editable="false" 
 									   entitySet="StudentSrv" 
 									   useTablePersonalisation="true" 
@@ -46,46 +46,10 @@
 									   persistencyKey="SmartTablePKey"> 
 					<!-- layout data used to make the table growing but the filter bar fixed -->
 					<Table
-					    sticky="ColumnHeaders,HeaderToolbar"
-						selectionChange=".onRowPress"
+					    selectionChange=".onRowPress"
 						mode="SingleSelectMaster"
-						growing="true" 
-						growingScrollToLoad="true" 
-						growingThreshold="5"
-						id="oTable">
-						<columns>
-							<Column width="150px" hAlign="Left">
-								<Text text="Full Name" />
-								<customData>
-									<!-- Custom Field -->
-									<core:CustomData key="p13nData"
-										value='\{"columnKey":       "full_name", 
-											 	 "maxLength":       "5", 
-												 "columnIndex":     "4", 
-												 "leadingProperty": "full_name",
-												 "sortProperty":    "full_name", 
-												 "filterProperty":  "full_name",
-												 "type":            "string"
-												}'/>
-								</customData>
-							</Column>
-						</columns>
-						<items>
-							<!-- Table Navigation -->
-							<ColumnListItem type="Navigation">
-								<cells>
-									<!-- Use formatter to dispay full name -->
-									<Text text="{
-										parts: [
-											{path: 'first_name'},
-											{path: 'last_name'}
-										],
-										formatter: '.formatter.combineText'
-									}" />
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>
+						id="oTable"
+					/>
                 </smartTable:SmartTable>	            
 	        </VBox>
 	        <VBox id="vbox1" class="sapUiSmallMargin">
