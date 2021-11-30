@@ -1,15 +1,19 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
 ], function(
 	Controller,
+	formatter,
 	JSONModel,
 	MessageToast
 ) {
 	"use strict";
 
 	return Controller.extend("project2.project2.controller.Master", {
+		formatter: formatter,
+		
         onInit: function () {
             this._defaultODataModel  = this.getOwnerComponent().getModel();
 			this._categoryODataModel = this.getOwnerComponent().getModel("categoryModel");
