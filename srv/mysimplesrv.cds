@@ -8,14 +8,15 @@ service mysrvdemo @(path:'/mysrvdemoService'){
     @readonly
     entity StudentSrv as select from lms.Students {
         *,
-        null as full_name: String
+        //null as full_name: String
+        //https://www.sqlitetutorial.net/sqlite-string-functions/sqlite-concat/
+        last_name || ', ' || first_name as full_name : String
     };
 
     //http://localhost:4004/mysrvdemo/myfoobar()
     //myfoobar is a REST API service
     //http://localhost:4004/mysrvdemo/myfoobar(msg='Hi World!')
     function myfoobar(msg : String) returns String;
-
 }
 
 annotate lms.Students with @(
