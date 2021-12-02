@@ -2,7 +2,6 @@ const cds = require("@sap/cds");
 
 // async here is to make it synchronous, to avoid a mess of callbacks and promises
 async function _readStudentSrv(req, next) {
-  //const { StudentSrv } = srv.entities
   let bCallNext = true;
 
   if (req.query.SELECT.where) {
@@ -70,14 +69,27 @@ function _filterStudents(students, req)  {
 }
 
 
-function _myFoobar(req, res) {
+async function _myFoobar(req, res) {
   //return "Hello World!";
+  const service = await cds.connect.to('db');
+  const txService = service.tx(req);
+  //Below two statements work as well
+  //const { StudentSrv } = this.entities;
+  //const ordersInput = await txService.run(SELECT.from(StudentSrv));
+  const sql = 'select * from mysrvdemo_StudentSrv where email = "' + req.data.msg + '"';
+  try {
+    const student = await txService.run(sql);
+    req.data.msg = student[0].last_name + ", " + student[0].first_name;
+  }
+  catch (error) {
+    //some errors
+  }
   return req.data.msg;
 }
 
 
-const mysrvdemo = function (srv) {
-// http://localhost:4004/mysrvdemoService/myfoobar(msg='Hi')
+const mysrvdemo = async function (srv) {
+  // http://localhost:4004/mysrvdemoService/myfoobar(msg='Hi')
   srv.on("myfoobar", _myFoobar)
 
 
