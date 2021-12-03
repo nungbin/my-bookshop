@@ -92,6 +92,21 @@ const mysrvdemo = async function (srv) {
   // http://localhost:4004/mysrvdemoService/myfoobar(msg='Hi')
   srv.on("myfoobar", _myFoobar)
 
+  //http://localhost:4004/mysrvdemoService/getFullName(email='1@gmail.com')
+  srv.on("getFullName", async req => {
+    const {email} = req.data;
+    const {StudentSrv} = srv.entities;
+  
+    //learned from https://youtu.be/Y6hmywf3ZHU?t=450
+    //Use 'req' to attach it to the existing transaction to establish a connection
+    const conn = srv.transaction(req);
+    const results = await conn.read(StudentSrv).where({email: email});
+  
+    return results.map((each) => {
+      return each.last_name + ', ' + each.first_name;
+    })
+  })
+
 
   //Below method(.on) is to override the default Service implementation
   //srv.on("READ", "StudentSrv", _readStudentSrv);

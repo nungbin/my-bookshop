@@ -1,0 +1,28 @@
+###
+GET "http://localhost:4004/mysrvdemoService/myfoobar(msg='1@gmail.com')"
+
+###
+GET http://localhost:4004/mysrvdemoService/StudentSrv
+
+###
+POST http://localhost:4004/mysrvdemoService/Students
+Content-Type: application/json
+
+{
+    "email":        "1@gmail.com",
+    "first_name":   "first 1",
+    "last_name":    "last 1",
+    "date_sign_up": "2020-03-23"
+}
+
+
+###
+POST http://localhost:4004/mysrvdemoService/Students
+Content-Type: application/json
+
+{
+    "email":        "2@gmail.com",
+    "first_name":   "first 2",
+    "last_name":    "last 2",
+    "date_sign_up": "2021-03-23"
+}

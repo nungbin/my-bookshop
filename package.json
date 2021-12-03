@@ -63,7 +63,6 @@
   },
   "sapux": [
     "app/project1",
-    "app/project2",
-    "app/project3"
+    "app/project2"
   ]
 }
