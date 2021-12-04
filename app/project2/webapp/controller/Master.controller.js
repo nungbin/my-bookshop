@@ -121,6 +121,16 @@ sap.ui.define([
 			});
 			//oEvent.getParameter("listItem").getBindingContext().getProperty("email");
 			//oEvent.getParameter("listItem").getBindingContext().getProperty("first_name");
+		},
+
+		onButtonPress: function(oEvent) {
+			debugger;
+			let obj = oEvent.getSource().getBindingContext().getObject();
+			MessageToast.show(obj.first_name + " is clicked");
+		},
+
+		onSearch: function(oEvent) {
+			debugger;
 		}
 	});
 });

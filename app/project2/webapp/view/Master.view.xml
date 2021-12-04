@@ -6,6 +6,7 @@
 		  xmlns:gridTable="sap.ui.table"
   	      xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
 		  xmlns:smartTable="sap.ui.comp.smarttable" 
+  		  xmlns:plugins="sap.m.plugins"		  
 		  controllerName="project2.project2.controller.Master">
 	<Page xmlns="sap.m" id="pageId" title="Page Title" floatingFooter="true">
 	    <headerContent>
@@ -22,20 +23,20 @@
 	        <VBox id="vbox0" class="sapUiSmallMargin">
 	            <Text text=""/>
                 <smartFilterBar:SmartFilterBar id="smartFilterBar" 
-				                               entitySet="StudentSrv" 
+				                               entitySet="StudentSrv"
 											   persistencyKey="SmartFilterPKey">
-                    <smartFilterBar:controlConfiguration>
-                        <smartFilterBar:ControlConfiguration key="Category" 
-						                                     visibleInAdvancedArea="true" 
-															 preventInitialDataFetchInValueHelpDialog="false">
-                        </smartFilterBar:ControlConfiguration>
-                    </smartFilterBar:controlConfiguration>
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration
+								key="full_name" label="{i18n>MasterView.FullName}">
+						</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:controlConfiguration>
                 </smartFilterBar:SmartFilterBar>
                 <smartTable:SmartTable id="smartTable_ResponsiveTable" 
 									   class="sapUiSizeCompact"
 				                       smartFilterId="smartFilterBar" 
 									   placeToolbarInTable="true"
-									   tableType="ResponsiveTable" 
+									   tableType="ResponsiveTable"
+									   enableAutoColumnWidth="true"
 									   editable="false" 
 									   entitySet="StudentSrv" 
 									   useTablePersonalisation="true" 
@@ -48,8 +49,60 @@
 					<Table
 					    selectionChange=".onRowPress"
 						mode="SingleSelectMaster"
-						id="oTable"
-					/>
+						id="oTable">
+						<dependents>
+							<plugins:ColumnResizer />
+						</dependents>
+						<columns>
+							<Column width="15rem">
+								<customData>
+									<core:CustomData key="p13nData"
+										value='\{"columnKey":       "first_name", 
+										         "columnIndex":     "5",
+												 "sortProperty":    "first_name",
+												 "filterProperty":  "first_name"
+												}'/>
+								</customData>
+								<Label text="First Name" />
+							</Column>
+							<Column width="15rem">
+								<customData>
+									<core:CustomData key="p13nData"
+										value='\{"columnKey":       "last_name", 
+										         "columnIndex":     "5",
+												 "sortProperty":    "last_name",
+												 "filterProperty":  "last_name"
+												}'/>
+								</customData>
+								<Label text="Last Name" />
+							</Column>
+						</columns>
+						<items>
+							<!-- Table Navigation -->
+							<ColumnListItem type="Navigation">
+								<cells>
+									<Button
+										activeIcon=""
+										icon=""
+										text="{first_name}"
+										type="Default"
+										press=".onButtonPress"
+									/>
+									<!-- <Input value="{first_name}" editable="false"/> -->
+								</cells>
+								<cells>
+									<Button
+										activeIcon=""
+										icon=""
+										text="{last_name}"
+										type="Default"
+										press=".onButtonPress"
+									/>
+									<!-- <Input value="{first_name}" editable="false"/> -->
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
                 </smartTable:SmartTable>	            
 	        </VBox>
 	        <VBox id="vbox1" class="sapUiSmallMargin">
