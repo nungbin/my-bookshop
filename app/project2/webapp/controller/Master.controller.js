@@ -159,17 +159,16 @@ sap.ui.define([
 
 		_setContextForCreateStudent: function() {
 			//learned from https://www.youtube.com/watch?v=AB1i1GGJMn4&t=2388s
-			debugger;
 			this._defaultODataModel.setDeferredGroups(["createStudent"]);
 			this.getView().byId("createStudent").setModel(this._defaultODataModel);
 
 			this._studentContext = this._defaultODataModel.createEntry("/Students", {
 				groupId: "createStudent",
 				success: function(oData) {
-					debugger;
+					console.log("Successful in creating a student entry!");
 				},
 				error: function(error) {
-					debugger;
+					console.log("Error in creating a student entry!");
 				}
 			});
 			this._defaultODataModel.setDefaultBindingMode("TwoWay");
@@ -181,6 +180,7 @@ sap.ui.define([
 				groupId: "createStudent",
 				success: function(oData) {
 					MessageBox.show("Student with email " + oData.__batchResponses[0].__changeResponses[0].data.email + "has been created successfully!");
+					this.getView().byId("smartFilterBar").search();
 					this.getView().byId("createStudent").close();
 				}.bind(this),
 				error: function(error) {
@@ -189,11 +189,11 @@ sap.ui.define([
 		},
 
 		onCancelStudentRecord: function() {
-			debugger;
 			if (this._defaultODataModel.hasPendingChanges()) {
-				MessageBox.warning("Your entries will be lost when you leave this page."), {
+				MessageBox.warning("Your entries will be lost when you leave this page.", {
+					icon:    MessageBox.Icon.WARNING,
 					actions: ["Leave Page", MessageBox.Action.CLOSE],
-					emphasizeAction: "Lave Page",
+					emphasizeAction: "Leave Page",
 					onClose: function(sAction) {
 						debugger;
 						if (sAction == "Leave Page") {
@@ -201,10 +201,10 @@ sap.ui.define([
 							this._defaultODataModel.refresh();
 							this.getView().byId("createStudent").close();
 						}
-					}.bind(this)
-				}		
+					}.bind(this),
+				})		
 			}
-			this.getView().byId("createStudent").close();
+			//this.getView().byId("createStudent").close();
 		}
 
 		// onCloseCreateStudentDialog: function() {
