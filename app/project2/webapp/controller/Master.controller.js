@@ -58,61 +58,6 @@ sap.ui.define([
 				this.getOwnerComponent().setModel(this._bookJSONModel, "bookModel")
 		},	
 
-        onClick: function (oEvent) {
-            var sPath = "/Books";
-            var that = this;
-
-			this._categoryODataModel.read(sPath, {
-				success: function (oModelData, oResponse) {
-					//oData.BIC = oModelData.BIC;
-					//oData.IBAN_CLABE_OTHERS = oModelData.IBAN_CLABE_OTHERS;
-					//that.getView().getModel("trainingModel").setData(oData);  //refresh data on the screen
-
-					if ( oModelData.results.length >= 1 ) {
-						// let oData = that.getView().getModel("bookModel").getData();
-						// //Below statement acts similar to ABAP's MOVE-CORRESPONDING
-						// oData = Object.assign(oData, oModelData.results[0]);
-						// that.getView().getModel("bookModel").setData(oData);
-						// //Bind result to the simple form
-						// that.getView().byId("sfBooks").bindElement({ path: "/", model: "bookModel" });
-
-						// let oData = that._bookJSONModel.getData();
-						// //Below statement acts similar to ABAP's MOVE-CORRESPONDING
-						// oData = Object.assign(oData, oModelData.results[0]);
-						that._bookJSONModel.setData(oModelData.results[0]);
-
-						// //Bind result to the simple form
-						that.getView().byId("sfBooks").bindElement({ path: "/", model: "bookModel" });
-					}
-				},
-				error: function (oError) {
-					MessageToast.show(that.getBundle().getText("MasterController.ERRORUnableToRetrieveABook"));
-				}
-			});            
-        },
-
-		onClickCallMyFooBar: function(oEvent) {
-			let that = this;
-			let valueMyFooBar = this.getView().byId("inputMyFooBar").getValue();
-			let url=`/mysrvdemoService/myfoobar(msg='${valueMyFooBar}')`; //this is a REST API call
-			$.ajax({
-				url: url,
-				type: 'GET',
-				//data: $.param({msg: "Hi"}),
-				contentType: "application/json",
-				dataType: "json",
-				async: false,				
-				success: function(data){
-					debugger;
-					//console.log("success"+data);
-					that.getView().byId("labelMyFooBar").setText(data.value);
-				},
-				error: function(e){
-					debugger;
-					console.log("error: "+e);
-				}
-			  });
-		},
 
 		onRowPress: function(oEvent) {
 			let eMail = this.getView().byId(oEvent.getSource().getId()).getSelectedItem().getBindingContext().getProperty("email");
@@ -204,7 +149,6 @@ sap.ui.define([
 					}.bind(this),
 				})		
 			}
-			//this.getView().byId("createStudent").close();
 		}
 
 		// onCloseCreateStudentDialog: function() {

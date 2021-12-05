@@ -68,16 +68,16 @@
 							<!-- Table Navigation -->
 							<ColumnListItem>
 								<cells>
-									<Button
+									<!-- <Button
 										activeIcon=""
 										icon=""
 										text="{first_name}"
 										press=".onButtonPress"
-									/>
-									<!-- <Input value="{first_name}" editable="false"/> -->
+									/> -->
+									<Label text="{first_name}"/>
 								</cells>
 								<cells>
-									<Input value="{last_name}" editable="false"/>
+									<Label text="{last_name}"/>
 								</cells>
 							</ColumnListItem>
 						</items>
