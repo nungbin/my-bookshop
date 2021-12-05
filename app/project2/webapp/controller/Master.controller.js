@@ -2,12 +2,16 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../model/formatter",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
+	"sap/m/MessageToast",
+	"sap/ui/core/Fragment",
+	"sap/m/MessageBox"
 ], function(
 	Controller,
 	formatter,
 	JSONModel,
-	MessageToast
+	MessageToast,
+	Fragment,
+	MessageBox
 ) {
 	"use strict";
 
@@ -129,8 +133,82 @@ sap.ui.define([
 			MessageToast.show(obj.first_name + " is clicked");
 		},
 
-		onSearch: function(oEvent) {
+		onOpenCreateStudentDialog: function() {
+			let oView = this.getView();
+			let that  = this;
+
+			// create the dialog lazily
+			if (!this.byId("createStudent")) {
+				//load asynchronous
+				Fragment.load({
+					id:         oView.getId(),
+					name:       "project2.project2.view.CreateStudent",
+					controller: this
+				}).then(function (oDialog) {
+					// connect dialog to the root view of this component (models, lifecycle)
+					oView.addDependent(oDialog);
+					oDialog.open();
+					that._setContextForCreateStudent();
+				})
+			}
+			else {
+				this.byId("createStudent").open();
+				this._setContextForCreateStudent();
+			}
+		},
+
+		_setContextForCreateStudent: function() {
+			//learned from https://www.youtube.com/watch?v=AB1i1GGJMn4&t=2388s
 			debugger;
+			this._defaultODataModel.setDeferredGroups(["createStudent"]);
+			this.getView().byId("createStudent").setModel(this._defaultODataModel);
+
+			this._studentContext = this._defaultODataModel.createEntry("/Students", {
+				groupId: "createStudent",
+				success: function(oData) {
+					debugger;
+				},
+				error: function(error) {
+					debugger;
+				}
+			});
+			this._defaultODataModel.setDefaultBindingMode("TwoWay");
+			this.getView().byId("createStudent").setBindingContext(this._studentContext);
+		},
+
+		onSaveStudentRecord: function() {
+			this._defaultODataModel.submitChanges({
+				groupId: "createStudent",
+				success: function(oData) {
+					MessageBox.show("Student with email " + oData.__batchResponses[0].__changeResponses[0].data.email + "has been created successfully!");
+					this.getView().byId("createStudent").close();
+				}.bind(this),
+				error: function(error) {
+				}
+			})
+		},
+
+		onCancelStudentRecord: function() {
+			debugger;
+			if (this._defaultODataModel.hasPendingChanges()) {
+				MessageBox.warning("Your entries will be lost when you leave this page."), {
+					actions: ["Leave Page", MessageBox.Action.CLOSE],
+					emphasizeAction: "Lave Page",
+					onClose: function(sAction) {
+						debugger;
+						if (sAction == "Leave Page") {
+							this._defaultODataModel.deleteCreatedEntry(this._studentContext);
+							this._defaultODataModel.refresh();
+							this.getView().byId("createStudent").close();
+						}
+					}.bind(this)
+				}		
+			}
+			this.getView().byId("createStudent").close();
 		}
+
+		// onCloseCreateStudentDialog: function() {
+		// 	this.byId("createStudent").close();
+		// }
 	});
 });

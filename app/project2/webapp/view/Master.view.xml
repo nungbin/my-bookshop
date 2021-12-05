@@ -46,6 +46,16 @@
 									   requestAtLeastFields="first_name, last_name" 
 									   persistencyKey="SmartTablePKey"> 
 					<!-- layout data used to make the table growing but the filter bar fixed -->
+					<smartTable:customToolbar>
+						<OverflowToolbar design="Transparent">
+							<ToolbarSpacer/>
+							<OverflowToolbarButton text="Test"/>
+							<OverflowToolbarButton icon="sap-icon://add"    
+							           			   tooltip="Create a new student entry" 
+												   text="Create"
+												   press="onOpenCreateStudentDialog"/>
+						</OverflowToolbar>
+					</smartTable:customToolbar>
 					<Table
 					    selectionChange=".onRowPress"
 						mode="SingleSelectMaster"
@@ -54,51 +64,35 @@
 							<plugins:ColumnResizer />
 						</dependents>
 						<columns>
-							<Column width="15rem">
+							<Column id="first_name" hAlign="Begin">
 								<customData>
 									<core:CustomData key="p13nData"
-										value='\{"columnKey":       "first_name", 
-										         "columnIndex":     "5",
-												 "sortProperty":    "first_name",
-												 "filterProperty":  "first_name"
-												}'/>
+										value='\{"columnKey": "first_name", "autoColumnWidth": \{ "visibleProperty": "first_name" }, "columnIndex": 2, "leadingProperty": "first_name", "sortProperty": "first_name", "additionalProperty": "Name1", "description": "Name1", "displayBehaviour": "descriptionOnly", "width": "360px"}' />
 								</customData>
-								<Label text="First Name" />
+								<Text text="First Name" />
 							</Column>
-							<Column width="15rem">
+							<Column id="last_name" hAlign="Begin">
 								<customData>
 									<core:CustomData key="p13nData"
-										value='\{"columnKey":       "last_name", 
-										         "columnIndex":     "5",
-												 "sortProperty":    "last_name",
-												 "filterProperty":  "last_name"
-												}'/>
+										value='\{"columnKey": "last_name", "autoColumnWidth": true, "maxLength": 5,"columnIndex":4, "isCurrency": true, "leadingProperty": "last_name", "sortProperty": "last_name", "type": "numeric", "unit": "Hwaer"}' />
 								</customData>
-								<Label text="Last Name" />
-							</Column>
+								<Text text="Last Name" />
+							</Column>							
 						</columns>
 						<items>
 							<!-- Table Navigation -->
-							<ColumnListItem type="Navigation">
+							<ColumnListItem>
 								<cells>
 									<Button
 										activeIcon=""
 										icon=""
 										text="{first_name}"
-										type="Default"
 										press=".onButtonPress"
 									/>
 									<!-- <Input value="{first_name}" editable="false"/> -->
 								</cells>
 								<cells>
-									<Button
-										activeIcon=""
-										icon=""
-										text="{last_name}"
-										type="Default"
-										press=".onButtonPress"
-									/>
-									<!-- <Input value="{first_name}" editable="false"/> -->
+									<Input value="{last_name}" editable="false"/>
 								</cells>
 							</ColumnListItem>
 						</items>
