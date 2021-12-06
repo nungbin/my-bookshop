@@ -15,7 +15,7 @@
             title="{Name}">
             <smartForm:Group label="Create a new student entry">
                 <smartForm:GroupElement label="Email">
-                    <smartField:SmartField value="{email}" />
+                    <smartField:SmartField id="iDCreateEmail" value="{email}"/>
                 </smartForm:GroupElement>
                 <smartForm:GroupElement label="First Name">
                     <smartField:SmartField value="{first_name}" />

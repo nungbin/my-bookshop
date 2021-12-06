@@ -117,8 +117,8 @@
           "target": "master"
         },
         {
-          "pattern": "detail/{email}",
           "name": "detail",
+          "pattern": "detail/{email}",
           "target": "detail"
         }        
       ],

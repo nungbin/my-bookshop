@@ -28,7 +28,7 @@
 				</smartform:customToolbar>
 				<smartform:Group>
 					<smartform:GroupElement label="Email">
-						<smartfield:SmartField id="dtEmail" value="{email}">
+						<smartfield:SmartField id="dtEmail" value="{email}" enabled="false">
 						</smartfield:SmartField>
 					</smartform:GroupElement>
 					<smartform:GroupElement label="First Name">
@@ -40,8 +40,12 @@
 						</smartfield:SmartField>
 					</smartform:GroupElement>
 					<smartform:GroupElement label="Date signed up">
-						<smartfield:SmartField id="dtDateSignUp" value="{date_sign_up}">
-						</smartfield:SmartField>
+						<smartfield:SmartField id="dtDateSignUp" value="{date_sign_up}"/>
+						<!-- <smartfield:SmartField id="dtDateSignUp" 
+											   value="{
+												   path: 'date_sign_up',
+												   formatter: '.formatter.formatDate'
+											   }"/> -->
 					</smartform:GroupElement>
 				</smartform:Group>
 			</smartform:SmartForm>

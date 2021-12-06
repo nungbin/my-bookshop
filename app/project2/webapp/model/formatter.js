@@ -17,6 +17,7 @@ sap.ui.define([], function () {
         //       return finalText + sStatus;
         //   }
     },
+
     numberState: function (sPrice) {
       if (sPrice > 10) {
         return "Error";
@@ -24,5 +25,12 @@ sap.ui.define([], function () {
         return "Success";
       }
     },
+
+    formatDate: function(oDate) {
+      // if (typeof oDate !== 'undefined') {
+      //   var oDateFormat = sap.ui.core.format.DateFormat.getInstance({pattern: "yyyy-mm-dd"});
+      //   return oDateFormat.format(oDate);
+      // }
+    }
   };
 });

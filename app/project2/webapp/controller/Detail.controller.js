@@ -1,8 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
+  "../model/formatter",
+  "sap/m/MessageBox",
+  "sap/m/MessageToast"
 ], function(
 	Controller,
+	formatter,
+	MessageBox,
 	MessageToast
 ) {
 	"use strict";
@@ -11,6 +15,8 @@ sap.ui.define([
         /**
          * @override
          */
+         formatter: formatter,
+
         onInit: function() {
             //Controller.prototype.onInit.apply(this, arguments);
             this.getOwnerComponent().getRouter().getRoute("detail").attachPatternMatched(this.objectMatched, this);
@@ -24,6 +30,7 @@ sap.ui.define([
             //this.getView().bindElement("/StudentSrv(email='" + eMail + "')");
             this.byId("idUpdateStudent").setEnabled(false);
             this.byId("idDeleteStudent").setEnabled(false);
+            this.byId("sfDetail").setEditable(false);
         },
 
         onNavPress: function() {
@@ -37,9 +44,10 @@ sap.ui.define([
 
         onUpdateStudent: function(oEvent) {
             var that = this;
-            let studentModel = this.getOwnerComponent().getModel();
+            var oDateFormat = sap.ui.core.format.DateFormat.getInstance({pattern: "yyyy-mm-dd"});
+            let studentModel = this.getOwnerComponent().getModel(); //get the default oData model
             let studentData  = this.getView().byId("sfDetail").getBindingContext().getObject();
-            let objData      = studentData;
+            let objData      = this.getOwnerComponent().getModel("studentModel").getData();
 
             // var objData = 
             // {
@@ -48,33 +56,64 @@ sap.ui.define([
             //     "last_name":    "last 33",
             //     "date_sign_up": "2021-12-05"
             // };
+            objData.email        = this.byId("dtEmail").getValue();
             objData.first_name   = this.byId("dtFirstName").getValue();
             objData.last_name    = this.byId("dtLastName").getValue();
-            debugger;
-            objData.date_sign_up = this.byId("dtDateSignUp").getValue();
+            objData.date_sign_up = new Date(this.byId("dtDateSignUp").getValue());
             studentModel.update("/Students(email='" + objData.email + "')", 
                 objData, {
                   success: function(oData) {
-                    MessageBox.show("Student with email " + that.byId("dtEmail").getValue() + "has been updated successfully!");
-                    debugger;
+                    let oEmail = that.byId("dtEmail").getValue();
+
+                    that.getOwnerComponent().getModel("UIControlModel").setProperty("/mainRefresh", true)
+                    MessageToast.show("Student with email " + oEmail + " updated!");
+                    //Refresh the screen and set to display mode!!!
+                    that.getView().byId("sfDetail").bindElement("/StudentSrv(email='" + oEmail + "')");
+                    that.byId("sfDetail").setEditable(false);
                   }, 
                   error: function(error) {
+                      console.log(error);
                       debugger;
                   }
                 });
-
         },
 
         onDeleteStudent: function(oEVent) {
-            // a good reference for CRUD operation for oDatamOdel
+          var that = this;
+          let oData = this.getView().byId("sfDetail").getBindingContext().getObject();
+          let sTitle = "Delete " + oData.email + " ?";
+
+          MessageBox.show("Are you sure you would like to delete this record?", {
+              icon: MessageBox.Icon.INFORMATION,
+              title: sTitle ,
+              actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+              emphasizedAction: MessageBox.Action.NO,
+              onClose: function (oAction) {
+                if (oAction === 'YES') {
+                  that._deleteRecord(oData);
+                }
+              }
+            }
+          );
+        },
+
+
+        _deleteRecord: function(oData) {
+            // a good reference for CRUD operation for oDataModel
             // https://sapui5.hana.ondemand.com/#/topic/6c47b2b39db9404582994070ec3d57a2.html%23loioff667e12b8714f3595e68f3e7c0e7a14
             var that = this;
-            let studentModel = this.getOwnerComponent().getModel();
-            let oData = this.getView().byId("sfDetail").getBindingContext().getObject();
+            let studentModel = this.getOwnerComponent().getModel(); //get the default oData model
+            debugger;
 
             studentModel.remove("/Students(email='" + oData.email + "')", {
               success: function(oData) {
-                MessageToast.show("Student with email " + that.byId("dtEmail").getValue() + "has been deleted successfully!");
+                that.getOwnerComponent().getModel("UIControlModel").setProperty("/mainRefresh", true)
+                MessageToast.show("Student with email " + that.byId("dtEmail").getValue() + " deleted!", {
+                  duration: 1000,
+                  onClose: function() {
+                    that.onNavPress();
+                  }
+                });
               }, 
               error: function(error) {
                 console.log(error);

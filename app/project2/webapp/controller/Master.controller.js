@@ -30,6 +30,8 @@ sap.ui.define([
 			// at this point, Odata call isn't made yet since it's async.
 			this._defaultODataModel.metadataLoaded().then(this._onStudentMetadataLoaded.bind(this));
 			this._categoryODataModel.metadataLoaded().then(this._onCategoryMetadataLoaded.bind(this));
+
+			this.getOwnerComponent().getRouter().getRoute("RouteRootView").attachPatternMatched(this.objectMatched, this);
 		},
 
 		// this is triggered by, to ensure metadata gets loaded
@@ -56,7 +58,7 @@ sap.ui.define([
 
 				//_personJSON = Object.assign(_personJSON, obj);	
 				//oEntityType[0].property.forEach(element => {  _personJSON[element.name] = ""; });
-		},	
+		},
 
 
 		_onStudentMetadataLoaded: function() {
@@ -66,13 +68,33 @@ sap.ui.define([
 					let tempItemName = oItem.name;
 					if (tempItemName.toUpperCase() === "STUDENTS") {
 						//Initialize a JSON model based on meta data
-						that._studentJSONModel = new sap.ui.model.json.JSONModel({
-							"": oItem.property
+						let tStudentJSON = {};
+						oItem.property.forEach(element => {  
+							switch(element.type) {
+								case 'Edm.DateTime':
+									tStudentJSON[element.name] = new Date();
+									break;
+								default:
+									tStudentJSON[element.name] = "";
+									break;
+								}			
 						});
-						that.getOwnerComponent().setModel(that._studentJSONModel, "studentModel")
+						that._studentJSONModel = new JSONModel(tStudentJSON);
+						that.getOwnerComponent().setModel(that._studentJSONModel, "studentModel");
 						//return oItem;
 					}
 				});
+		},
+
+				
+		objectMatched: function(oEvent) {
+			let bMainRefresh = this._UIControlJSONModel.getProperty("/mainRefresh");
+			if (typeof bMainRefresh !== 'undefined') {
+				if (bMainRefresh) {
+					this.getView().byId("smartFilterBar").search();
+					this._UIControlJSONModel.setProperty("/mainRefresh", false);
+				}
+			}
 		},
 
 
@@ -137,16 +159,43 @@ sap.ui.define([
 		},
 
 		onSaveStudentRecord: function() {
-			this._defaultODataModel.submitChanges({
-				groupId: "createStudent",
-				success: function(oData) {
-					MessageBox.show("Student with email " + oData.__batchResponses[0].__changeResponses[0].data.email + "has been created successfully!");
-					this.getView().byId("smartFilterBar").search();
-					this.getView().byId("createStudent").close();
-				}.bind(this),
-				error: function(error) {
-				}
-			})
+			if (this.byId("iDCreateEmail").getValue() === "") {
+				MessageBox.error("Email can't be blank", {
+					icon:    MessageBox.Icon.ERROR,
+				})
+			}
+			else {
+				this._defaultODataModel.submitChanges({
+					groupId: "createStudent",
+					success: function(oData) {
+						//Whoever at SAP did the coding of this, putting statusCode into different structures based on results
+						//   IS JUST ALL-TIME DUMB!!! so dumb to the freaking bones!!!
+						//   Why can't the error handling be consistent with what ABAP is handling???
+						if (typeof oData.__batchResponses[0].response !== 'undefined') {
+							if (typeof oData.__batchResponses[0].response.statusCode != '201') {
+								//Convert JSON string to a JSON object
+								//https://blogs.sap.com/2014/11/13/omodelread-jsonparse-jsonmodel/
+								var oError = JSON.parse(oData.__batchResponses[0].response.body);
+								MessageBox.error(oError.error.message.value, {
+									icon:    MessageBox.Icon.ERROR,
+								})
+							}
+						}
+						else {
+							if (typeof oData.__batchResponses[0].__changeResponses[0] !== 'undefined') {
+								if (oData.__batchResponses[0].__changeResponses[0].statusCode === '201') {
+									MessageBox.show("Student with email " + oData.__batchResponses[0].__changeResponses[0].data.email + "has been created successfully!");
+									this.getView().byId("smartFilterBar").search();
+									this.getView().byId("createStudent").close();		
+								}
+							}
+						}
+					}.bind(this),
+					error: function(error) {
+						console.log(error);
+					}
+				})					
+			}
 		},
 
 		onCancelStudentRecord: function() {
