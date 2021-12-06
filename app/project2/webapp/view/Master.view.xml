@@ -27,7 +27,8 @@
 									   entitySet="StudentSrv" 
 									   useTablePersonalisation="true" 
 									   enableAutoBinding="true"
-									   header="Students" 
+									   ignoredFields="createdAt,createdBy,modifiedAt,modifiedBy"
+									   header="Students"
 									   demandPopin="true"
 									   requestAtLeastFields="first_name, last_name" 
 									   persistencyKey="SmartTablePKey"> 

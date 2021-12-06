@@ -32,9 +32,12 @@ annotate lms.Students with @(
                 $Type : 'UI.DataField',
                 Value : full_name,
                 Label : '{i18n>full_name}',
+                ![@UI.Hidden],
                 ![@UI.Importance] : #Low
             }
         ],
+
+        
     },
 
     //Object Page

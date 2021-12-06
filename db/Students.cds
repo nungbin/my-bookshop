@@ -1,6 +1,8 @@
+using { managed, Country } from '@sap/cds/common';
+
 namespace myCompany.hr.lms;
 
-entity Students {
+entity Students : managed {
     key email:    String(65);
     first_name:   String(20);
     last_name:    String(20);

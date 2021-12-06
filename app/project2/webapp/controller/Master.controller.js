@@ -69,15 +69,14 @@ sap.ui.define([
 					if (tempItemName.toUpperCase() === "STUDENTS") {
 						//Initialize a JSON model based on meta data
 						let tStudentJSON = {};
-						oItem.property.forEach(element => {  
-							switch(element.type) {
-								case 'Edm.DateTime':
-									tStudentJSON[element.name] = new Date();
-									break;
-								default:
-									tStudentJSON[element.name] = "";
-									break;
-								}			
+
+						oItem.property.forEach(element => {
+							if (element.type.toUpperCase().includes("EDM.DATETIME")) {
+								tStudentJSON[element.name] = new Date();
+							}
+							else {
+								tStudentJSON[element.name] = "";
+							}
 						});
 						that._studentJSONModel = new JSONModel(tStudentJSON);
 						that.getOwnerComponent().setModel(that._studentJSONModel, "studentModel");

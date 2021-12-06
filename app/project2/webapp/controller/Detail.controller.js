@@ -73,7 +73,6 @@ sap.ui.define([
                   }, 
                   error: function(error) {
                       console.log(error);
-                      debugger;
                   }
                 });
         },
@@ -103,7 +102,6 @@ sap.ui.define([
             // https://sapui5.hana.ondemand.com/#/topic/6c47b2b39db9404582994070ec3d57a2.html%23loioff667e12b8714f3595e68f3e7c0e7a14
             var that = this;
             let studentModel = this.getOwnerComponent().getModel(); //get the default oData model
-            debugger;
 
             studentModel.remove("/Students(email='" + oData.email + "')", {
               success: function(oData) {

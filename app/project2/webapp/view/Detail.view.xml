@@ -47,6 +47,21 @@
 												   formatter: '.formatter.formatDate'
 											   }"/> -->
 					</smartform:GroupElement>
+					<smartform:GroupElement label="-----">
+						<smartfield:SmartField enabled="false"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement label="Created At">
+						<smartfield:SmartField id="dtCreatedAt" value="{createdAt}" enabled="false"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement label="Created By">
+						<smartfield:SmartField id="dtCreatedBy" value="{createdBy}" enabled="false"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement label="Modified At">
+						<smartfield:SmartField id="dtModifiedAt" value="{modifiedAt}" enabled="false"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement label="Modified By">
+						<smartfield:SmartField id="dtModifiedBy" value="{modifiedBy}" enabled="false"/>
+					</smartform:GroupElement>
 				</smartform:Group>
 			</smartform:SmartForm>
 		</content>
