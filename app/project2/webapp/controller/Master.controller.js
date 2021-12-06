@@ -28,35 +28,52 @@ sap.ui.define([
 
 			// learned this from Vivek
 			// at this point, Odata call isn't made yet since it's async.
-			this._categoryODataModel.metadataLoaded().then(this._onMetadataLoaded.bind(this));
+			this._defaultODataModel.metadataLoaded().then(this._onStudentMetadataLoaded.bind(this));
+			this._categoryODataModel.metadataLoaded().then(this._onCategoryMetadataLoaded.bind(this));
 		},
 
 		// this is triggered by, to ensure metadata gets loaded
 		//		this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
 		//		if call is not blocked by SSO which can occur with WebIDE.
 		//		if call is blocked by SSO, _onMetadataLoaded will not be triggered at all. SSO needs to be turned off.
-		_onMetadataLoaded: function () {
+		_onCategoryMetadataLoaded: function () {
 			// Fetching MetaModel from the OData model once metadata is loaded from 
 			//    this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
+			var that = this;
 			var oMetaData = this._categoryODataModel.getServiceMetadata(),
 				// iterate through array. common technique used in Javascript
 				oEntityType = oMetaData.dataServices.schema[0].entityType.filter(function (oItem) {
-					let tempItemName = '';
-					tempItemName = oItem.name;
+					let tempItemName = oItem.name;
 					if (tempItemName.toUpperCase() === "BOOKS") {
-						return oItem;
+						//Initialize a JSON model based on meta data
+						that._bookJSONModel = new sap.ui.model.json.JSONModel({
+							"": oItem.property
+						});
+						that.getOwnerComponent().setModel(that._bookJSONModel, "bookModel")
+						//return oItem;
 					}
 				});
 
 				//_personJSON = Object.assign(_personJSON, obj);	
 				//oEntityType[0].property.forEach(element => {  _personJSON[element.name] = ""; });
-
-				//Initialize a JSON model based on meta data
-				this._bookJSONModel = new sap.ui.model.json.JSONModel({
-  				  "": oEntityType[0].property
-				});
-				this.getOwnerComponent().setModel(this._bookJSONModel, "bookModel")
 		},	
+
+
+		_onStudentMetadataLoaded: function() {
+			var that = this;
+			var oMetaData = this._defaultODataModel.getServiceMetadata(),
+				oEntityType = oMetaData.dataServices.schema[0].entityType.filter(function (oItem) {
+					let tempItemName = oItem.name;
+					if (tempItemName.toUpperCase() === "STUDENTS") {
+						//Initialize a JSON model based on meta data
+						that._studentJSONModel = new sap.ui.model.json.JSONModel({
+							"": oItem.property
+						});
+						that.getOwnerComponent().setModel(that._studentJSONModel, "studentModel")
+						//return oItem;
+					}
+				});
+		},
 
 
 		onRowPress: function(oEvent) {
@@ -73,7 +90,6 @@ sap.ui.define([
 		},
 
 		onButtonPress: function(oEvent) {
-			debugger;
 			let obj = oEvent.getSource().getBindingContext().getObject();
 			MessageToast.show(obj.first_name + " is clicked");
 		},
@@ -116,7 +132,7 @@ sap.ui.define([
 					console.log("Error in creating a student entry!");
 				}
 			});
-			this._defaultODataModel.setDefaultBindingMode("TwoWay");
+			this._defaultODataModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
 			this.getView().byId("createStudent").setBindingContext(this._studentContext);
 		},
 
@@ -140,7 +156,6 @@ sap.ui.define([
 					actions: ["Leave Page", MessageBox.Action.CLOSE],
 					emphasizeAction: "Leave Page",
 					onClose: function(sAction) {
-						debugger;
 						if (sAction == "Leave Page") {
 							this._defaultODataModel.deleteCreatedEntry(this._studentContext);
 							this._defaultODataModel.refresh();

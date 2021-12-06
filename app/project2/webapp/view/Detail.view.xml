@@ -2,36 +2,45 @@
 	xmlns:smartform="sap.ui.comp.smartform"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
-	xmlns:c="sap.ui.core"
 	displayBlock="true"
 	height="100%"
 	busyIndicatorDelay="0"
 	controllerName="project2.project2.controller.Detail"
 >
 	<Page id="detailPage" title="Student Information" showNavButton="true" navButtonPress=".onNavPress">
+		<Panel ></Panel>
 		<content>
 			<smartform:SmartForm id="sfDetail"
-			                     layout="ResponsiveLayout"
-								 title="{i18n>DetailView.StudentDetail}">
+								 editTogglable="true"
+								 title="{i18n>DetailView.StudentDetail}"
+								 editToggled=".onEditToggled"
+								 >
 				<smartform:layout>
 					<smartform:ColumnLayout columnsM="1" columnsL="1" columnsXL="1"/>
 				</smartform:layout>
-
+				<!-- https://sapui5.hana.ondemand.com/1.30.6/docs/guide/99e33bdfde074bb48d2e603fa5ecd2d0.html -->
+				<smartform:customToolbar>
+					<Toolbar height="3rem">
+						<ToolbarSpacer />
+						<Button id="idUpdateStudent" text="Update Student" icon="sap-icon://edit"   press=".onUpdateStudent"/>
+						<Button id="idDeleteStudent" text="Delete Student" icon="sap-icon://delete" press=".onDeleteStudent"/>
+					</Toolbar>
+				</smartform:customToolbar>
 				<smartform:Group>
 					<smartform:GroupElement label="Email">
-						<smartfield:SmartField value="{email}">
+						<smartfield:SmartField id="dtEmail" value="{email}">
 						</smartfield:SmartField>
 					</smartform:GroupElement>
 					<smartform:GroupElement label="First Name">
-						<smartfield:SmartField value="{first_name}">
+						<smartfield:SmartField id="dtFirstName" value="{first_name}">
 						</smartfield:SmartField>
 					</smartform:GroupElement>
 					<smartform:GroupElement label="Last Name">
-						<smartfield:SmartField value="{last_name}">
+						<smartfield:SmartField id="dtLastName" value="{last_name}">
 						</smartfield:SmartField>
 					</smartform:GroupElement>
 					<smartform:GroupElement label="Date signed up">
-						<smartfield:SmartField value="{date_sign_up}">
+						<smartfield:SmartField id="dtDateSignUp" value="{date_sign_up}">
 						</smartfield:SmartField>
 					</smartform:GroupElement>
 				</smartform:Group>

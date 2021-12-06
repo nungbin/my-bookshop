@@ -12,8 +12,7 @@ service mysrvdemo @(path:'/mysrvdemoService'){
     }    
     entity StudentCRUD as projection on lms.Students;
 
-
-    @readonly
+    //@readonly. if this is read only, the edittoggle button will not work
     entity StudentSrv as select from lms.Students {
         *,
         //null as full_name: String
