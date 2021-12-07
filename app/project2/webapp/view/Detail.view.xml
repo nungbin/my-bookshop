@@ -47,9 +47,17 @@
 												   formatter: '.formatter.formatDate'
 											   }"/> -->
 					</smartform:GroupElement>
-					<smartform:GroupElement label="-----">
-						<smartfield:SmartField enabled="false"/>
+					<smartform:GroupElement label="Grade">
+						<smartfield:SmartField id="dtGrade" value="{grade}"/>
 					</smartform:GroupElement>
+					<smartform:GroupElement label="Country Code">
+						<smartfield:SmartField id="dtCountryCode" value="{country_code}"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement label="Country Name">
+						<smartfield:SmartField id="dtCountryName" value="{country/name}" enabled="false"/>
+					</smartform:GroupElement>
+				</smartform:Group>
+				<smartform:Group label="Administrative Data" >	
 					<smartform:GroupElement label="Created At">
 						<smartfield:SmartField id="dtCreatedAt" value="{createdAt}" enabled="false"/>
 					</smartform:GroupElement>

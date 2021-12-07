@@ -15,7 +15,12 @@
             title="{Name}">
             <smartForm:Group label="Create a new student entry">
                 <smartForm:GroupElement label="Email">
-                    <smartField:SmartField id="iDCreateEmail" value="{email}"/>
+                    <smartField:SmartField id="iDCreateEmail" 
+                                           value="{email}"
+                                           valueStateText="{UIControlModel>/emailValueStateText}"
+                                           valueState="{UIControlModel>/emailValueState}"
+                                           change=".onCreateEmailChanged"
+                    />
                 </smartForm:GroupElement>
                 <smartForm:GroupElement label="First Name">
                     <smartField:SmartField value="{first_name}" />
@@ -25,6 +30,12 @@
                 </smartForm:GroupElement>
                 <smartForm:GroupElement label="Date Signed Up">
                     <smartField:SmartField value="{date_sign_up}" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement label="Grade">
+                    <smartField:SmartField value="{grade}" />
+                </smartForm:GroupElement>
+                <smartForm:GroupElement label="Country Code">
+                    <smartField:SmartField value="{country_code}" />
                 </smartForm:GroupElement>
             </smartForm:Group>
         </smartForm:SmartForm>

@@ -34,9 +34,24 @@ annotate lms.Students with @(
                 Label : '{i18n>full_name}',
                 ![@UI.Hidden],
                 ![@UI.Importance] : #Low
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : grade,
+                ![@UI.Importance] : #Medium
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : country_code,
+                ![@UI.Importance] : #Low
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : country.name,
+                Label : '{i18n>country_name}',
+                ![@UI.Importance] : #Low
             }
         ],
-
         
     },
 
@@ -71,6 +86,18 @@ annotate lms.Students with @(
                 {
                     $Type : 'UI.DataField',
                     Value : date_sign_up
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value : grade
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value : country_code
+                },
+                {
+                    $Type : 'UI.DataField',
+                    Value : country.name
                 }
             ]
         },

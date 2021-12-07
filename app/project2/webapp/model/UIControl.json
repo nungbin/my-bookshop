@@ -1,4 +1,6 @@
 {
-    "visibleControl": false,
-    "mainRefresh":    false
+    "visibleControl":      false,
+    "mainRefresh":         false,
+    "emailValueStateText": "",
+    "emailValueState":     "None"
 }

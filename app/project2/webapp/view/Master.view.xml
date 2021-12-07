@@ -55,30 +55,39 @@
 									<core:CustomData key="p13nData"
 										value='\{"columnKey": "first_name", "autoColumnWidth": \{ "visibleProperty": "first_name" }, "columnIndex": 2, "leadingProperty": "first_name", "sortProperty": "first_name", "filterProperty": "first_name"}' />
 								</customData>
-								<Text text="First Name" />
+								<Label text="First Name" />
 							</Column>
 							<Column id="last_name" hAlign="Begin">
 								<customData>
 									<core:CustomData key="p13nData"
 										value='\{"columnKey": "last_name", "autoColumnWidth": true, "maxLength": 5,"columnIndex":4, "leadingProperty": "last_name", "sortProperty": "last_name", "filterProperty": "last_name"}' />
 								</customData>
-								<Text text="Last Name" />
+								<Label text="Last Name" />
 							</Column>							
+							<Column width="3rem">
+								<customData>
+									<core:CustomData key="p13nData"
+										value='\{"columnKey": "clone", "columnIndex": "10"}' />
+								</customData>
+								<Label text="" />
+							</Column>
 						</columns>
 						<items>
 							<!-- Table Navigation -->
 							<ColumnListItem>
 								<cells>
-									<!-- <Button
-										activeIcon=""
-										icon=""
-										text="{first_name}"
-										press=".onButtonPress"
-									/> -->
 									<Label text="{first_name}"/>
 								</cells>
 								<cells>
 									<Label text="{last_name}"/>
+								</cells>
+								<cells>
+									<Button
+										activeIcon="sap-icon://copy"
+										icon="sap-icon://copy"
+										text="{clone}"
+										press=".onClone"
+									/>
 								</cells>
 							</ColumnListItem>
 						</items>

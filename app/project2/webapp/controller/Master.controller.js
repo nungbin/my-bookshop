@@ -1,6 +1,7 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../model/formatter",
+	"../Services/ServiceManager",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/ui/core/Fragment",
@@ -8,6 +9,7 @@ sap.ui.define([
 ], function(
 	Controller,
 	formatter,
+	ServiceManager,
 	JSONModel,
 	MessageToast,
 	Fragment,
@@ -32,6 +34,7 @@ sap.ui.define([
 			this._categoryODataModel.metadataLoaded().then(this._onCategoryMetadataLoaded.bind(this));
 
 			this.getOwnerComponent().getRouter().getRoute("RouteRootView").attachPatternMatched(this.objectMatched, this);
+			ServiceManager.initJSONModel();
 		},
 
 		// this is triggered by, to ensure metadata gets loaded
@@ -158,10 +161,18 @@ sap.ui.define([
 		},
 
 		onSaveStudentRecord: function() {
-			if (this.byId("iDCreateEmail").getValue() === "") {
-				MessageBox.error("Email can't be blank", {
-					icon:    MessageBox.Icon.ERROR,
-				})
+			// if (this.byId("iDCreateEmail").getValue() === "") {
+			// 	MessageBox.error("Email can't be blank", {
+			// 		icon:    MessageBox.Icon.ERROR,
+			// 	})
+			// }
+			let sReturn = ServiceManager.validateEmailFormat(this.byId("iDCreateEmail").getValue());
+			if (sReturn !== ""){
+				//set focus for a smart field
+				//https://ui5.sap.com/1.60.11/#/api/sap.ui.core.Element/methods/focus
+				this.getView().byId("iDCreateEmail").focus(this.byId("iDCreateEmail"));
+				this._UIControlJSONModel.setProperty("/emailValueState", sap.ui.core.ValueState.Error);
+				this._UIControlJSONModel.setProperty("/emailValueStateText", sReturn);
 			}
 			else {
 				this._defaultODataModel.submitChanges({
@@ -212,6 +223,21 @@ sap.ui.define([
 					}.bind(this),
 				})		
 			}
+		},
+
+		onCreateEmailChanged: function(oEvent) {
+			let inValue = oEvent.getSource().getValue();
+			let sReturn = ServiceManager.validateEmailFormat(inValue);
+			if (sReturn !== "") {
+				//https://sapui5.hana.ondemand.com/sdk/#/api/sap.ui.core.ValueState%23properties
+				this._UIControlJSONModel.setProperty("/emailValueState", sap.ui.core.ValueState.Error);
+				this._UIControlJSONModel.setProperty("/emailValueStateText", sReturn);
+			};
+		},
+
+		
+		onClone: function() {
+			
 		}
 
 		// onCloseCreateStudentDialog: function() {
