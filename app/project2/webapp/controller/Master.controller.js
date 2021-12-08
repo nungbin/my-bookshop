@@ -16,6 +16,7 @@ sap.ui.define([
 	MessageBox
 ) {
 	"use strict";
+	var oStudentData = {};
 
 	return Controller.extend("project2.project2.controller.Master", {
 		formatter: formatter,
@@ -35,6 +36,7 @@ sap.ui.define([
 
 			this.getOwnerComponent().getRouter().getRoute("RouteRootView").attachPatternMatched(this.objectMatched, this);
 			ServiceManager.initJSONModel();
+			oStudentData = {};
 		},
 
 		// this is triggered by, to ensure metadata gets loaded
@@ -90,6 +92,7 @@ sap.ui.define([
 
 				
 		objectMatched: function(oEvent) {
+			oStudentData = {};
 			let bMainRefresh = this._UIControlJSONModel.getProperty("/mainRefresh");
 			if (typeof bMainRefresh !== 'undefined') {
 				if (bMainRefresh) {
@@ -113,12 +116,14 @@ sap.ui.define([
 			//oEvent.getParameter("listItem").getBindingContext().getProperty("first_name");
 		},
 
-		onButtonPress: function(oEvent) {
-			let obj = oEvent.getSource().getBindingContext().getObject();
-			MessageToast.show(obj.first_name + " is clicked");
-		},
 
 		onOpenCreateStudentDialog: function() {
+			oStudentData = {};
+			this._OpenCreateStudentDialog();
+		},
+
+
+		_OpenCreateStudentDialog: function() {
 			let oView = this.getView();
 			let that  = this;
 
@@ -149,6 +154,12 @@ sap.ui.define([
 
 			this._studentContext = this._defaultODataModel.createEntry("/Students", {
 				groupId: "createStudent",
+				properties: oStudentData,
+				// properties: {
+				// 	"email":        "3@gmail.com",
+				// 	"first_name":   "first 3",
+				// 	"last_name":    "last 3"
+				// },
 				success: function(oData) {
 					console.log("Successful in creating a student entry!");
 				},
@@ -236,8 +247,12 @@ sap.ui.define([
 		},
 
 		
-		onClone: function() {
-			
+		onClone: function(oEvent) {
+			debugger;
+			let tmpData = oEvent.getSource().getBindingContext().getObject();
+			ServiceManager.prepareStudentData(tmpData, oStudentData);
+			oStudentData.email = "";    //clear email
+			this._OpenCreateStudentDialog();
 		}
 
 		// onCloseCreateStudentDialog: function() {

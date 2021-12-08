@@ -2,7 +2,7 @@ using { managed, Country } from '@sap/cds/common';
 
 namespace myCompany.hr.lms;
 
-define type tyGrade: Integer;
+define type tyGrade: String(5);
 
 // Master data can be found here: https://github.com/SAP-samples/cloud-cap-samples/tree/main/common/data
 entity Students : managed {

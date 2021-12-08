@@ -30,7 +30,7 @@ sap.ui.define([
             //http://localhost:4004/mysrvdemoService/StudentSrv(email='2@gmail.com')
             let eMail = oEvent.getParameter("arguments").email;
             //below statement makes another oData call
-            debugger;
+            
             this.getView().byId("sfDetail").bindElement("/StudentSrv(email='" + eMail + "')", {
               expand: "country($select=code,name)"
             });
@@ -167,12 +167,7 @@ sap.ui.define([
             tmpData.first_name   = this.byId("dtFirstName").getValue();
             tmpData.last_name    = this.byId("dtLastName").getValue();
             tmpData.date_sign_up = new Date(this.byId("dtDateSignUp").getValue());
-            if (!Number.isInteger(parseInt(this.byId("dtGrade").getValue()))) {
-              tmpData.grade = 0;
-            }
-            else {
-              tmpData.grade = parseInt(this.byId("dtGrade").getValue());
-            }
+            tmpData.grade        = this.byId("dtGrade").getValue();
             tmpData.country_code = this.byId("dtCountryCode").getValue();
             return JSON.stringify(tmpData);
         }

@@ -16,7 +16,7 @@ Content-Type: application/json
     "first_name":   "first 1",
     "last_name":    "last 1",
     "date_sign_up": "2020-03-23",
-    "grade":        90,
+    "grade":        "90",
     "country_code": "CA"
 }
 
@@ -30,7 +30,7 @@ Content-Type: application/json
     "first_name":   "first 2",
     "last_name":    "last 2",
     "date_sign_up": "2021-03-23",
-    "grade":        85,
+    "grade":        "85",
     "country_code": "TH"
 }
 
@@ -44,7 +44,7 @@ Content-Type: application/json
     "first_name":   "first 3",
     "last_name":    "last 3",
     "date_sign_up": "2021-12-05",
-    "grade":        92,
+    "grade":        "92",
     "country_code": "TW"
 }
 
@@ -58,6 +58,6 @@ Content-Type: application/json
     "first_name":   "first 33",
     "last_name":    "last 33",
     "date_sign_up": "2021-12-05",
-    "grade":        93,
+    "grade":        "93",
     "country_code": "TW"
 }

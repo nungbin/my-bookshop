@@ -33,6 +33,16 @@ sap.ui.define([
                     return true;
             }
             return false;
+        },
+
+
+        prepareStudentData: function(o1, o2) {
+            o2.email        = o1.email;
+            o2.first_name   = o1.first_name;            
+            o2.last_name    = o1.last_name;
+            o2.date_sign_up = o1.date_sign_up;
+            o2.grade        = o1.grade;
+            o2.country_code = o1.country_code;
         }
 	};
 });
