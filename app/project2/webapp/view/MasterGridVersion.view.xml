@@ -72,7 +72,7 @@
 				</OverflowToolbar>
 			</smartTable:customToolbar>
 			<table:Table id="table1" 
-							fixedColumnCount="2"
+							fixedColumnCount="1"
 							selectionMode="Single"
 							visibleRowCount="3"
 							visibleRowCountMode="Auto"
