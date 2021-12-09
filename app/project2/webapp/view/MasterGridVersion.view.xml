@@ -48,16 +48,16 @@
 			</smartFilterBar:controlConfiguration>
 		</smartFilterBar:SmartFilterBar>
 		<smartTable:SmartTable id="smartTable_ResponsiveTable" 
-								class="sapUiResponsiveContentPadding"
-								smartFilterId="smartFilterBar" 
-								placeToolbarInTable="true"
-								tableType="Table"
-								entitySet="StudentSrv" 
-								enableAutoBinding="false"
-								ignoredFields="createdAt,createdBy,modifiedAt,modifiedBy"
-								header="Students"
-								enableAutoColumnWidth="true"
-								persistencyKey="SmartTablePKey"> 
+							   class="sapUiResponsiveContentPadding"
+							   smartFilterId="smartFilterBar" 
+							   placeToolbarInTable="true"
+							   tableType="Table"
+							   entitySet="StudentSrv"
+							   beforeRebindTable=".onBeforeRebind" 
+							   enableAutoBinding="false"
+							   ignoredFields="createdAt,createdBy,modifiedAt,modifiedBy"
+							   header="Students"
+							   persistencyKey="SmartTablePKey"> 
 			<!-- layout data used to make the table growing but the filter bar fixed -->
 			<smartTable:layoutData>
 				<FlexItemData growFactor="1" baseSize="0%"/>
@@ -68,14 +68,14 @@
 					<OverflowToolbarButton icon="sap-icon://add"    
 											tooltip="Create a new student entry" 
 											text="Create"
-											press="onOpenCreateStudentDialog"/>
+											press=".onOpenCreateStudentDialog"/>
 				</OverflowToolbar>
 			</smartTable:customToolbar>
-			<table:Table id="table1" 
-							fixedColumnCount="1"
-							selectionMode="Single"
-							visibleRowCount="3"
-							visibleRowCountMode="Auto"
+			<table:Table id="idGridTable1"
+						 fixedColumnCount="1"
+						 selectionMode="Single"
+						 visibleRowCount="3"
+						 visibleRowCountMode="Auto"
 			>
 				<table:columns>
 					<table:Column
