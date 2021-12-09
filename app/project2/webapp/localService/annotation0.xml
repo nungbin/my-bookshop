@@ -1,0 +1,7 @@
+<Property Name="date_sign_up"
+          Type="Edm.DateTime " 
+          Nullable="true" 
+          sap:filter-restriction="interval" 
+          sap:required-in-filter="true" 
+          sap:label="Date Signed Up" 
+/>

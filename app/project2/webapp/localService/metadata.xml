@@ -86,7 +86,10 @@
         <Property Name="email" Type="Edm.String" MaxLength="65" Nullable="false"/>
         <Property Name="first_name" Type="Edm.String" MaxLength="20"/>
         <Property Name="last_name" Type="Edm.String" MaxLength="20"/>
-        <Property Name="date_sign_up" Type="Edm.Date"/>
+        <Property Name="date_sign_up" 
+                  Type="Edm.Date"
+                  sap:filter-restriction="interval" 
+                  sap:required-in-filter="true"/> 
         <Property Name="grade" Type="Edm.String" MaxLength="5"/>
         <NavigationProperty Name="country" Type="mysrvdemo.Countries">
           <ReferentialConstraint Property="country_code" ReferencedProperty="code"/>

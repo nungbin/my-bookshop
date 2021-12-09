@@ -25,6 +25,12 @@
 						key="full_name" label="{i18n>MasterView.FullName}">
 				</smartFilterBar:ControlConfiguration>
 			</smartFilterBar:controlConfiguration>
+    		<smartFilterBar:controlConfiguration>								 
+          		<smartFilterBar:ControlConfiguration 
+				  		key="date_sign_up"
+               			conditionType="sap.ui.comp.config.condition.DateRangeType" 
+               			visibleInAdvancedArea="true"/>
+	  		</smartFilterBar:controlConfiguration>			
 			<smartFilterBar:controlConfiguration>
 				<smartFilterBar:ControlConfiguration
 						key="country.code" visible="false">
