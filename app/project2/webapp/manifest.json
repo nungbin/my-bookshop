@@ -17,7 +17,10 @@
         "type": "OData",
         "settings": {
           "odataVersion": "2.0",
-          "localUri": "localService/metadata.xml"
+          "localUri": "localService/metadata.xml",
+          "annotations": [
+            "annotation0"
+          ]
         }
       },
       "categoryService": {
@@ -31,7 +34,14 @@
       "UIControl_alias":{
 				"uri": "model/UIControl.json",
 				"type": "JSON"
-			}      
+			},
+      "annotation0": {
+        "type": "ODataAnnotation",
+        "uri": "localService/annotation0.xml",
+        "settings": {
+          "localUri": "localService/annotation0.xml"
+        }
+      }
 		}
   },
   "sap.ui": {

@@ -18,7 +18,7 @@ service mysrvdemo @(path:'/mysrvdemoService'){
         //null as full_name: String
         //https://www.sqlitetutorial.net/sqlite-string-functions/sqlite-concat/
         last_name || ', ' || first_name as full_name : String
-    };
+    } order by modifiedAt desc;
 
 
     //http://localhost:4004/mysrvdemoService/myfoobar()

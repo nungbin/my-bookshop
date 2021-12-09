@@ -263,6 +263,14 @@ sap.ui.define([
 			ServiceManager.prepareStudentData(tmpData, oStudentData);
 			oStudentData.email = "";    //clear email
 			this._OpenCreateStudentDialog();
+		},
+
+
+		onSFBInitialise: function(oEvent) {
+		},
+
+
+		onSearch: function(oEvent) {
 		}
 
 		// onCloseCreateStudentDialog: function() {
