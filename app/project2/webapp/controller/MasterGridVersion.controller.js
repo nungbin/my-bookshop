@@ -16,7 +16,9 @@ sap.ui.define([
 	MessageBox
 ) {
 	"use strict";
-	var oStudentData = {};
+	var oStudentData = {},
+      oResultData  = [],
+      sSelectString;
 
 	return Controller.extend("project2.project2.controller.Master", {
     formatter: formatter,
@@ -46,6 +48,7 @@ sap.ui.define([
         .attachPatternMatched(this.objectMatched, this);
       ServiceManager.initJSONModel();
       oStudentData = {};
+      sSelectString = "";
     },
 
     // this is triggered by, to ensure metadata gets loaded
@@ -297,7 +300,6 @@ sap.ui.define([
     },
 
     onClone: function (oEvent) {
-      debugger;
       let tmpData = oEvent.getSource().getBindingContext().getObject();
       ServiceManager.prepareStudentData(tmpData, oStudentData);
       oStudentData.email = ""; //clear email
@@ -309,9 +311,13 @@ sap.ui.define([
       // set preventTableBind to 'true' will prevent smart table to search
       //oEvent.getParameters().bindingParams.preventTableBind = true;
 
-	  this.addBindingListener(oEvent.getParameters().bindingParams, 
-							  "dataReceived", 
-							  this._onBindingDataReceivedListener.bind(this));
+      this.addBindingListener(oEvent.getParameters().bindingParams, 
+                  "dataReceived", 
+                  this._onBindingDataReceivedListener.bind(this));
+
+      this.addBindingListener(oEvent.getParameters().bindingParams, 
+                  "dataRequested", 
+                  this._onBindingDataRequestedListener.bind(this));
     },
 
 
@@ -333,12 +339,63 @@ sap.ui.define([
     },
 
 
-	// receive data from smart table after hitting 'go' button
-	_onBindingDataReceivedListener: function(oEvent) {
-		debugger;
-		// oEvent.getParameter('data'):  to get result
-		// var itemCount = oEvent.getParameter('data')['results'].length;
-	},
+    // receive data from smart table after hitting 'go' button
+    _onBindingDataReceivedListener: function(oEvent) {
+      // oEvent.getParameter('data'):  to get result
+      // var itemCount = oEvent.getParameter('data')['results'].length;
+      oResultData = oEvent.getParameter('data')['results'];
+    },
+
+
+    _onBindingDataRequestedListener: function(oEvent) {
+      //this event gets triggered first before DataReceived event
+      console.log(sSelectString);
+      sSelectString = oEvent.getSource().mParameters.select;
+    },
+
+
+    // thanks to https://blogs.sap.com/2016/11/23/pdf-download-option-with-sapui5/
+    onDownloadPDF: function() {
+      if (sSelectString === "") {
+        MessageToast.show("There is no data to export to PDF!")     
+      }
+      else if (oResultData.length === 0) {
+        MessageToast.show("There is no data to export to PDF!")     
+      }else {
+        var arrayString = sSelectString.split(',');
+        var data = [];
+
+        for (var i=0 ; i < oResultData.length ; i++) {
+          data[i] = [];
+          for (var j=0 ; j < arrayString.length ; j++) {
+            let tlabel  = arrayString[j];
+            let tLabel2 = tlabel.split("/");
+            let tValue;
+            if (tLabel2.length > 1) {
+              tValue = oResultData[i][tLabel2[0]][tLabel2[1]];
+            }
+            else {
+              tValue = oResultData[i][tlabel];
+            }
+            if (tValue instanceof Date){
+              // Convert date to locale format
+              tValue = tValue.toLocaleDateString();
+            }
+            data[i].push(tValue);
+          } 
+        }
+
+        // data[0] = [1,2,3,4,5];
+        var doc = new jsPDF('p', 'pt');
+        doc.autoTable(arrayString, data);
+        doc.save("StudentScoreResults.pdf");  
+      }
+    },
+
+
+    onAfterVariantApply: function(oEvent) {
+      debugger;
+    },
 
     onSFBInitialise: function (oEvent) {},
 

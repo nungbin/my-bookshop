@@ -53,6 +53,8 @@
 							   placeToolbarInTable="true"
 							   tableType="Table"
 							   entitySet="StudentSrv"
+							   afterVariantApply=".onAfterVariantApply"
+							   afterVariantInitialise=".onAfterVariantApply"
 							   beforeRebindTable=".onBeforeRebind" 
 							   enableAutoBinding="false"
 							   ignoredFields="createdAt,createdBy,modifiedAt,modifiedBy"
@@ -66,9 +68,13 @@
 				<OverflowToolbar design="Transparent">
 					<ToolbarSpacer/>
 					<OverflowToolbarButton icon="sap-icon://add"    
-											tooltip="Create a new student entry" 
-											text="Create"
-											press=".onOpenCreateStudentDialog"/>
+										   tooltip="Create a new student entry" 
+										   text="Create"
+										   press=".onOpenCreateStudentDialog"/>
+					<OverflowToolbarButton icon="sap-icon://download"
+										   tooltip="Download to PDF" 
+										   text="Download to PDF"
+										   press=".onDownloadPDF"/>
 				</OverflowToolbar>
 			</smartTable:customToolbar>
 			<table:Table id="idGridTable1"
@@ -89,8 +95,8 @@
 						</table:customData>
 						<table:template>
 							<HBox>
-								<Button text="{email}" type="Transparent" press=".onRowPress"/>
-								<Button icon="sap-icon://copy" press=".onClone"/>
+								<Button text="{email}" tooltip="Click to view more detail" type="Transparent" press=".onRowPress"/>
+								<Button tooltip="Clone this entry" icon="sap-icon://copy" press=".onClone"/>
 							</HBox>
 						</table:template>
 					</table:Column>

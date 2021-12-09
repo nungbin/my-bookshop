@@ -248,7 +248,6 @@ sap.ui.define([
 
 		
 		onClone: function(oEvent) {
-			debugger;
 			let tmpData = oEvent.getSource().getBindingContext().getObject();
 			ServiceManager.prepareStudentData(tmpData, oStudentData);
 			oStudentData.email = "";    //clear email

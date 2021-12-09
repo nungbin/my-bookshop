@@ -109,7 +109,12 @@
         {
           "uri": "css/style.css"
         }
-      ]
+      ],
+			"js": [{
+				"uri": "JS/jspdf.debug.js"
+			}, {
+				"uri": "JS/jspdf.plugin.autotable.js"
+			}]
     },
     "routing": {
       "config": {

@@ -166,6 +166,7 @@ sap.ui.define([
             tmpData.email        = this.byId("dtEmail").getValue();
             tmpData.first_name   = this.byId("dtFirstName").getValue();
             tmpData.last_name    = this.byId("dtLastName").getValue();
+            // Convert date
             tmpData.date_sign_up = new Date(this.byId("dtDateSignUp").getValue());
             tmpData.grade        = this.byId("dtGrade").getValue();
             tmpData.country_code = this.byId("dtCountryCode").getValue();
