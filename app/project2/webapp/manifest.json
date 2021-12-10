@@ -111,7 +111,7 @@
         }
       ],
 			"js": [{
-				"uri": "JS/jspdf.debug.js"
+				"uri": "JS/jspdf.min.js"
 			}, {
 				"uri": "JS/jspdf.plugin.autotable.js"
 			}]

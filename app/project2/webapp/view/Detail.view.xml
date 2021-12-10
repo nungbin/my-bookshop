@@ -22,8 +22,9 @@
 				<smartform:customToolbar>
 					<Toolbar height="3rem">
 						<ToolbarSpacer />
-						<Button id="idUpdateStudent" text="Update Student" icon="sap-icon://edit"   press=".onUpdateStudent"/>
-						<Button id="idDeleteStudent" text="Delete Student" icon="sap-icon://delete" press=".onDeleteStudent"/>
+						<Button id="idUpdateStudent" text="Update Student"  icon="sap-icon://edit"   press=".onUpdateStudent"/>
+						<Button id="idDeleteStudent" text="Delete Student"  icon="sap-icon://delete" press=".onDeleteStudent"/>
+						<Button id="idPDFStudent"    text="Download to PDF (beta)" icon="sap-icon://pdf-attachment" press=".onPDFStudent"/>
 					</Toolbar>
 				</smartform:customToolbar>
 				<smartform:Group>

@@ -171,6 +171,29 @@ sap.ui.define([
             tmpData.grade        = this.byId("dtGrade").getValue();
             tmpData.country_code = this.byId("dtCountryCode").getValue();
             return JSON.stringify(tmpData);
+        },
+
+
+        onPDFStudent: function(oEvent) {
+          // The PDF output works but jsPDF doesn't seeem to know to preserve the original HTML formatting
+          // this website can be used for testing: https://www.gdoctohtml.com/
+          let element = $('#__xmlview0--sfDetail').html();
+
+          var doc = new jsPDF('p','pt','a4', true);
+          //We’ll make our own renderer to skip this editor
+          var specialElementHandlers = {
+            '#buttonId': function(element, renderer){
+                  return true;
+            }
+          };
+          doc.fromHTML(element,
+                       60,
+                       60,
+            {
+              'width': 750
+            }
+          );
+          doc.save('StudentDetail.pdf');
         }
 	});
 });
