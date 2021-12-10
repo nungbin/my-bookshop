@@ -356,39 +356,48 @@ sap.ui.define([
 
     // thanks to https://blogs.sap.com/2016/11/23/pdf-download-option-with-sapui5/
     onDownloadPDF: function() {
-      if (sSelectString === "") {
-        MessageToast.show("There is no data to export to PDF!")     
-      }
-      else if (oResultData.length === 0) {
+      let oColumns = this.byId("idGridTable1").getColumns();
+      var rColumns = ServiceManager.prepareGridTableColumns(oColumns);
+
+      // if (sSelectString === "") {
+      //   MessageToast.show("There is no data to export to PDF!")     
+      // }
+      if (oResultData.length === 0) {
         MessageToast.show("There is no data to export to PDF!")     
       }else {
-        var arrayString = sSelectString.split(',');
-        var data = [];
-
-        for (var i=0 ; i < oResultData.length ; i++) {
+        var title = [];
+        var data  = [];
+        debugger;
+        rColumns.forEach(element => {
+          if (element.visible) {
+            title.push(element.title);
+          }
+        });
+        for (let i=0 ; i < oResultData.length ; i++) {
           data[i] = [];
-          for (var j=0 ; j < arrayString.length ; j++) {
-            let tlabel  = arrayString[j];
-            let tLabel2 = tlabel.split("/");
-            let tValue;
-            if (tLabel2.length > 1) {
-              tValue = oResultData[i][tLabel2[0]][tLabel2[1]];
+          for (let j=0 ; j < rColumns.length ; j++) {
+            if (rColumns[j].visible) {
+              let tlabel  = rColumns[j].name;
+              let tLabel2 = tlabel.split("/");
+              let tValue;
+
+              if (tLabel2.length > 1) {
+                tValue = oResultData[i][tLabel2[0]][tLabel2[1]];
+              }
+              else {
+                tValue = oResultData[i][tlabel];
+              }
+              if (tValue instanceof Date){
+                // Convert date to locale format
+                tValue = tValue.toLocaleDateString();
+              }
+              data[i].push(tValue);
             }
-            else {
-              tValue = oResultData[i][tlabel];
-            }
-            if (tValue instanceof Date){
-              // Convert date to locale format
-              tValue = tValue.toLocaleDateString();
-            }
-            data[i].push(tValue);
           } 
         }
-
-        // data[0] = [1,2,3,4,5];
-        var doc = new jsPDF('p', 'pt');
-        doc.autoTable(arrayString, data);
-        doc.save("StudentScoreResults.pdf");  
+        let doc = new jsPDF('p', 'pt');
+        doc.autoTable(title, data);
+        doc.save("StudentScoreResults.pdf");
       }
     },
 

@@ -43,6 +43,24 @@ sap.ui.define([
             o2.date_sign_up = o1.date_sign_up;
             o2.grade        = o1.grade;
             o2.country_code = o1.country_code;
+        },
+
+
+
+        prepareGridTableColumns: function(oColumns) {
+            var rColumns = [];
+
+            oColumns.forEach(element => {
+                let t = {};
+
+                t.name    = element.mProperties.filterProperty || element.mProperties.sortProperty;
+                if (t.name !== "") {
+                    t.title   = element.mAggregations.label.getText();
+                    t.visible = element.getVisible();
+                    rColumns.push(t);    
+                }
+            });
+            return rColumns;
         }
 	};
 });
