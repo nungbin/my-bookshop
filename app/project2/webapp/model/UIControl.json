@@ -2,5 +2,9 @@
     "visibleControl":      false,
     "mainRefresh":         false,
     "emailValueStateText": "",
-    "emailValueState":     "None"
+    "emailValueState":     "None",
+    "updateStudentDetail": true,
+    "deleteStudentDetail": true,
+    "downloadStudentPDF":  true,
+    "editToggle":          true
 }

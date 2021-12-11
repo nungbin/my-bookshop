@@ -24,6 +24,7 @@ sap.ui.define([
         onInit: function() {
             //Controller.prototype.onInit.apply(this, arguments);
             this.getOwnerComponent().getRouter().getRoute("detail").attachPatternMatched(this.objectMatched, this);
+            this._UIControlJSONModel = this.getOwnerComponent().getModel("UIControlModel");
         },
 
         objectMatched: function(oEvent) {
@@ -42,7 +43,15 @@ sap.ui.define([
             //This is the proper place to initialize variables, not in the onInit.
             _oOriginalData = "";
             _firstTime = true;
-          },
+
+            this.byId("dtEmail").addEventDelegate({
+              onAfterRendering: function(){
+                // Act when the afterRendering event is fired on the element
+                //window.print();
+              }              
+            });
+        },
+
 
         onEditToggled: function(oEvent) {
           this.byId("idUpdateStudent").setEnabled(oEvent.getSource().getEditable());
@@ -175,25 +184,72 @@ sap.ui.define([
 
 
         onPDFStudent: function(oEvent) {
-          // The PDF output works but jsPDF doesn't seeem to know to preserve the original HTML formatting
-          // this website can be used for testing: https://www.gdoctohtml.com/
-          let element = $('#__xmlview0--sfDetail').html();
+          // // since jsPDF does not understand CSS, it does not render HTML properly
+          // let htmlString = '<table style="border-collapse: collapse; width: 100%;" border="1"><tbody><tr><td style="width: 50%; text-align: center;">First row</td><td style="width: 50%; text-align: center;">First column</td></tr></tbody></table><table style="border-collapse: collapse; width: 100%;" border="1"><tbody><tr><td style="width: 25%;">second row</td><td style="width: 25%;">1</td><td style="width: 25%;">123</td><td style="width: 25%;">sdf</td></tr></tbody></table>';
+          // var doc = new jsPDF('landscape','pt');
+          // doc.fromHTML(htmlString,100,100,{});
+          // doc.save('fileName.pdf');
+          
+          // the below piece of code is useless. doesn't apply CSS in the new window
+          // $.each(document.styleSheets, function(index, oStyleSheet) {
+          //   if (oStyleSheet.href){
+          //     var link = document.createElement("link");
+          //     link.type = oStyleSheet.type;
+          //     link.rel = "stylesheet";
+          //     link.href = oStyleSheet.href;
+          //     //win.document.head.appendChild(link); --> this doesn't work in IE
+          //     win.document.getElementsByTagName("head")[0].innerHTML = win.document.getElementsByTagName("head")[0].innerHTML + link.outerHTML;
+          //   }
+          // });
+          var that = this;
+          //make buttons invisible
+          this._UIControlJSONModel.setProperty("/updateStudentDetail", false);
+          this._UIControlJSONModel.setProperty("/deleteStudentDetail", false);
+          this._UIControlJSONModel.setProperty("/downloadStudentPDF",  false);
+          this._UIControlJSONModel.setProperty("/editToggle", false);
 
-          var doc = new jsPDF('p','pt','a4', true);
-          //We’ll make our own renderer to skip this editor
-          var specialElementHandlers = {
-            '#buttonId': function(element, renderer){
-                  return true;
+          setTimeout(function() {
+            var win = window.open("", "PrintWindow");
+            var headContents = $("head").html();
+            var bodyContent = $(".printAreaBox").html();
+  
+            bodyContent = bodyContent.replaceAll("Update Student", "");
+            bodyContent = bodyContent.replaceAll("Delete Student", "");
+            bodyContent = bodyContent.replaceAll("Download to PDF (beta)", "");
+            win.document.write('<html><head>' + headContents + "</head><body>");
+            win.document.write("<div>" + bodyContent + "</div>");
+            win.document.write('</body></html>');    
+            that._printTimeOut(win);
+
+            //make buttons visible
+            that._UIControlJSONModel.setProperty("/updateStudentDetail", true);
+            that._UIControlJSONModel.setProperty("/deleteStudentDetail", true);
+            that._UIControlJSONModel.setProperty("/downloadStudentPDF",  true);
+            that._UIControlJSONModel.setProperty("/editToggle", true);
+          }, 500);
+
+        },
+
+
+        // Vivek, the Guru's code actually works!!!
+        _printTimeOut: function (win) {
+          var that = this;
+          setTimeout(function () {
+            //https://stackoverflow.com/questions/39889656/wait-for-html-to-write-to-window-before-calling-window-print
+            var content = win.document.querySelector('body').innerHTML;
+
+            if (content.length) {
+              //Below statements ensure Print screen pops up.
+              //https://stackoverflow.com/questions/9852190/js-window-open-then-print
+              // number '5000'/five minutes seems to work the best in this case!!!
+              win.document.close();
+              win.focus();
+              win.print();
+              //win.close();
+            } else {
+              that._printTimeOut(win);
             }
-          };
-          doc.fromHTML(element,
-                       60,
-                       60,
-            {
-              'width': 750
-            }
-          );
-          doc.save('StudentDetail.pdf');
-        }
+          }, 5000);
+        }        
 	});
 });
