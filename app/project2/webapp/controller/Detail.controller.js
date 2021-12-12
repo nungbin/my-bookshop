@@ -249,7 +249,7 @@ sap.ui.define([
             } else {
               that._printTimeOut(win);
             }
-          }, 5000);
+          }, 2500);
         }        
 	});
 });

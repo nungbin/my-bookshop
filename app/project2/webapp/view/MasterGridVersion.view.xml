@@ -94,10 +94,10 @@
 								value='\{"columnKey": "email", "autoColumnWidth": \{ "visibleProperty": "email" }, "leadingProperty": "email"}' />
 						</table:customData>
 						<table:template>
-							<HBox>
+							<FlexBox  alignItems="Start" justifyContent="SpaceBetween">
 								<Button text="{email}" tooltip="Click to view more detail" type="Transparent" press=".onRowPress"/>
 								<Button tooltip="Clone this entry" icon="sap-icon://copy" press=".onClone"/>
-							</HBox>
+							</FlexBox>
 						</table:template>
 					</table:Column>
 				</table:columns>

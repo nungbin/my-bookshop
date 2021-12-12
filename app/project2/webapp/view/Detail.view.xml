@@ -24,7 +24,7 @@
 						<ToolbarSpacer />
 						<Button id="idUpdateStudent" visible="{UIControlModel>/updateStudentDetail}" text="Update Student"  icon="sap-icon://edit"   press=".onUpdateStudent"/>
 						<Button id="idDeleteStudent" visible="{UIControlModel>/deleteStudentDetail}" text="Delete Student"  icon="sap-icon://delete" press=".onDeleteStudent"/>
-						<Button id="idPDFStudent"    visible="{UIControlModel>/downloadStudentPDF}"  text="Download to PDF" icon="sap-icon://pdf-attachment" press=".onPDFStudent"/>
+						<Button id="idPDFStudent"    visible="{UIControlModel>/downloadStudentPDF}"  icon="sap-icon://print"  press=".onPDFStudent"/>
 					</Toolbar>
 				</smartform:customToolbar>
 				<smartform:Group>
