@@ -5,103 +5,107 @@
   	      xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
 		  xmlns:smartTable="sap.ui.comp.smarttable" 
 		  controllerName="project2.project2.controller.MasterGridVersion">
-	<VBox id="vbox0" fitContainer="true">
-		<smartFilterBar:SmartFilterBar id="smartFilterBar" 
-										initialise=".onSFBInitialise"
-										search=".onSearch"
-										entitySet="StudentSrv"
-										persistencyKey="SmartFilterPKey">
-			<!-- layout data used to make the table growing but the filter bar fixed -->
-			<smartFilterBar:layoutData>
-				<FlexItemData shrinkFactor="0" />
-			</smartFilterBar:layoutData>											   
-			<smartFilterBar:controlConfiguration>
-				<smartFilterBar:ControlConfiguration
-						key="email" mandatory="auto">
-				</smartFilterBar:ControlConfiguration>
-			</smartFilterBar:controlConfiguration>
-			<smartFilterBar:controlConfiguration>
-				<smartFilterBar:ControlConfiguration
-						key="full_name" label="{i18n>MasterView.FullName}">
-				</smartFilterBar:ControlConfiguration>
-			</smartFilterBar:controlConfiguration>
-    		<smartFilterBar:controlConfiguration>								 
-          		<smartFilterBar:ControlConfiguration 
-				  		key="date_sign_up"
-               			conditionType="sap.ui.comp.config.condition.DateRangeType" 
-               			visibleInAdvancedArea="true"/>
-	  		</smartFilterBar:controlConfiguration>			
-			<smartFilterBar:controlConfiguration>
-				<smartFilterBar:ControlConfiguration
-						key="country.code" visible="false">
-				</smartFilterBar:ControlConfiguration>
-			</smartFilterBar:controlConfiguration>
-			<smartFilterBar:controlConfiguration>
-				<smartFilterBar:ControlConfiguration
-						key="country.name" visible="false">
-				</smartFilterBar:ControlConfiguration>
-			</smartFilterBar:controlConfiguration>
-			<smartFilterBar:controlConfiguration>
-				<smartFilterBar:ControlConfiguration
-						key="country.descr" visible="false">
-				</smartFilterBar:ControlConfiguration>
-			</smartFilterBar:controlConfiguration>
-		</smartFilterBar:SmartFilterBar>
-		<smartTable:SmartTable id="smartTable_ResponsiveTable" 
-							   class="sapUiResponsiveContentPadding"
-							   smartFilterId="smartFilterBar" 
-							   placeToolbarInTable="true"
-							   tableType="Table"
-							   entitySet="StudentSrv"
-							   afterVariantApply=".onAfterVariantApply"
-							   afterVariantInitialise=".onAfterVariantApply"
-							   beforeRebindTable=".onBeforeRebind" 
-							   enableAutoBinding="false"
-							   ignoredFields="createdAt,createdBy,modifiedAt,modifiedBy"
-							   header="Students"
-							   persistencyKey="SmartTablePKey"> 
-			<!-- layout data used to make the table growing but the filter bar fixed -->
-			<smartTable:layoutData>
-				<FlexItemData growFactor="1" baseSize="0%"/>
-			</smartTable:layoutData>
-			<smartTable:customToolbar>
-				<OverflowToolbar design="Transparent">
-					<ToolbarSpacer/>
-					<OverflowToolbarButton icon="sap-icon://add"    
-										   tooltip="Create a new student entry" 
-										   text="Create"
-										   press=".onOpenCreateStudentDialog"/>
-					<OverflowToolbarButton icon="sap-icon://download"
-										   tooltip="Download to PDF" 
-										   text="Download to PDF"
-										   press=".onDownloadPDF"/>
-				</OverflowToolbar>
-			</smartTable:customToolbar>
-			<table:Table id="idGridTable1"
-						 fixedColumnCount="1"
-						 selectionMode="Single"
-						 visibleRowCount="3"
-						 visibleRowCountMode="Auto"
-			>
-				<table:columns>
-					<table:Column
-						width="11rem"
-						sortProperty="email"
-						filterProperty="email">
-						<Label text="Email" />
-						<table:customData>
-							<core:CustomData key="p13nData"
-								value='\{"columnKey": "email", "autoColumnWidth": \{ "visibleProperty": "email" }, "leadingProperty": "email"}' />
-						</table:customData>
-						<table:template>
-							<FlexBox  alignItems="Start" justifyContent="SpaceBetween">
-								<Button text="{email}" tooltip="Click to view more detail" type="Transparent" press=".onRowPress"/>
-								<Button tooltip="Clone this entry" icon="sap-icon://copy" press=".onClone"/>
-							</FlexBox>
-						</table:template>
-					</table:Column>
-				</table:columns>
-			</table:Table>
-		</smartTable:SmartTable>	            
-	</VBox>
+	<Page id="idPage0" enableScrolling="false" showHeader="false"  class="sapUiContentPadding">
+		<content>
+			<VBox id="vbox0" fitContainer="true">
+				<smartFilterBar:SmartFilterBar id="smartFilterBar" 
+												initialise=".onSFBInitialise"
+												search=".onSearch"
+												entitySet="StudentSrv"
+												showClearOnFB="true"
+												persistencyKey="SmartFilterPKey">
+					<!-- layout data used to make the table growing but the filter bar fixed -->
+					<smartFilterBar:layoutData>
+						<FlexItemData shrinkFactor="0" />
+					</smartFilterBar:layoutData>											   
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration
+								key="email" mandatory="auto">
+						</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:controlConfiguration>
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration
+								key="full_name" label="{i18n>MasterView.FullName}">
+						</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:controlConfiguration>
+					<smartFilterBar:controlConfiguration>								 
+						<smartFilterBar:ControlConfiguration 
+								key="date_sign_up"
+								conditionType="sap.ui.comp.config.condition.DateRangeType" 
+								visibleInAdvancedArea="true"/>
+					</smartFilterBar:controlConfiguration>			
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration
+								key="country.code" visible="false">
+						</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:controlConfiguration>
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration
+								key="country.name" visible="false">
+						</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:controlConfiguration>
+					<smartFilterBar:controlConfiguration>
+						<smartFilterBar:ControlConfiguration
+								key="country.descr" visible="false">
+						</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:controlConfiguration>
+				</smartFilterBar:SmartFilterBar>
+				<smartTable:SmartTable id="smartTable_ResponsiveTable" 
+									class="sapUiResponsiveContentPadding"
+									smartFilterId="smartFilterBar" 
+									placeToolbarInTable="true"
+									tableType="Table"
+									entitySet="StudentSrv"
+									afterVariantApply=".onAfterVariantApply"
+									afterVariantInitialise=".onAfterVariantApply"
+									beforeRebindTable=".onBeforeRebind" 
+									enableAutoBinding="false"
+									ignoredFields="createdAt,createdBy,modifiedAt,modifiedBy"
+									header="Students"
+									persistencyKey="SmartTablePKey"> 
+					<!-- layout data used to make the table growing but the filter bar fixed -->
+					<smartTable:layoutData>
+						<FlexItemData growFactor="1" baseSize="0%"/>
+					</smartTable:layoutData>
+					<smartTable:customToolbar>
+						<OverflowToolbar design="Transparent">
+							<ToolbarSpacer/>
+							<OverflowToolbarButton icon="sap-icon://add"    
+												   tooltip="Create a new student entry" 
+												   text="Create"
+												   press=".onOpenCreateStudentDialog"/>
+							<OverflowToolbarButton icon="sap-icon://download"
+												   tooltip="Download to PDF" 
+												   text="Download to PDF"
+												   press=".onDownloadPDF"/>
+						</OverflowToolbar>
+					</smartTable:customToolbar>
+					<table:Table id="idGridTable1"
+								 fixedColumnCount="1"
+								 selectionMode="Single"
+								 visibleRowCountMode="Auto"
+					>
+						<table:columns>
+							<table:Column
+								width="11rem"
+								sortProperty="email"
+								filterProperty="email">
+								<Label text="Email" />
+								<table:customData>
+									<core:CustomData key="p13nData"
+										value='\{"columnKey": "email", "autoColumnWidth": \{ "visibleProperty": "email" }, "leadingProperty": "email"}' />
+								</table:customData>
+								<table:template>
+									<FlexBox  alignItems="Start" justifyContent="SpaceBetween">
+										<Button text="{email}" tooltip="Click to view more detail" type="Transparent" press=".onRowPress"/>
+										<Button tooltip="Clone this entry" icon="sap-icon://copy" press=".onClone"/>
+									</FlexBox>
+								</table:template>
+							</table:Column>
+						</table:columns>
+					</table:Table>
+				</smartTable:SmartTable>	            
+			</VBox>
+		</content>
+	</Page>
 </mvc:View>

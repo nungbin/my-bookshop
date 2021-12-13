@@ -106,6 +106,8 @@ sap.ui.define([
             }
           }
         );
+
+        this._setTableSettings();
     },
 
     objectMatched: function (oEvent) {
@@ -118,6 +120,36 @@ sap.ui.define([
         }
       }
     },
+
+
+    _setTableSettings: function (params) {
+      let aTableData = [];
+      this.addPaginator("smartTable_ResponsiveTable", aTableData);
+    },
+
+
+    // custom paginator logic:
+    //   https://blogs.sap.com/2020/01/20/custom-paginator-for-grid-table-in-ui5/
+    addPaginator: function (tableId, tableData) {
+			var oTable = this.byId(tableId);
+			var oContentHolder = this.byId("idPage0");
+
+      this._destroyControl("vbox1");
+      var oVBox1 = new sap.m.VBox("vbox1", {
+		  });
+
+      // var oVBox1 = new sap.m.VBox("vbox1",{
+			// 	width : "10rem",
+			// 	items : new sap.m.Label({text: "hello"})
+			// });
+      
+      oContentHolder.addContent(oVBox1);
+    },
+
+
+    generatePaginator: function (tableData) {
+    },
+
 
     onRowPress: function (oEvent) {
       let sPath = oEvent.getSource().getBindingContext().getPath();
@@ -409,6 +441,15 @@ sap.ui.define([
     onSFBInitialise: function (oEvent) {},
 
     onSearch: function (oEvent) {},
+
+
+		_destroyControl: function (id) {
+			var oControl = this.getView().byId(id);
+			if (oControl !== undefined) oControl.destroy();
+
+			oControl = sap.ui.getCore().byId(id);
+			if (oControl !== undefined) oControl.destroy();
+		}
 
     // onCloseCreateStudentDialog: function() {
     // 	this.byId("createStudent").close();
