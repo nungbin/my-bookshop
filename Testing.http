@@ -61,3 +61,14 @@ Content-Type: application/json
     "grade":        "93",
     "country_code": "TW"
 }
+
+
+###
+POST http://localhost:4004/mysrvdemoService/moveUserToAnotherProject
+Content-Type: application/json
+
+{
+	"userId":       "12345",
+	"projectId":    "abcde"
+}
+

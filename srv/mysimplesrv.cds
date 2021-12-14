@@ -28,4 +28,16 @@ service mysrvdemo @(path:'/mysrvdemoService'){
 
     //http://localhost:4004/mysrvdemoService/getFullName(email='1@gmail.com')
     function getFullName(email: String) returns array of String;
+
+
+    type moveResult {
+        code:           Integer;
+        success:        Boolean;
+        moveStatus:     String;
+        userId:         String;
+        userName:       String;
+        projectId:      String;
+        projectName:    String;
+    }
+    action moveUserToAnotherProject(userId: String, projectId: String) returns moveResult;
 }

@@ -88,7 +88,19 @@ async function _myFoobar(req, res) {
 }
 
 
+// Better explanation from this Youtube video
+//   https://youtu.be/YlHHmZxelmw?t=450
+//   srv.on, srv.before. srv.after: 
+//     srv.before takes three arguments:
+//       1st argument: http method (* means any, read, get, post...etc)
+//       2nd argument: entity (optional)           $(req.method)
+//       3rd argument: a method ( req => {} )      ${req.target.name}
 const mysrvdemo = async function (srv) {
+  //srv.before("*", req => {
+    //console.log(`Method: ${req.method}`)
+    //console.log(`Target: ${req.target.name}`)
+  //})
+
   // http://localhost:4004/mysrvdemoService/myfoobar(msg='Hi')
   srv.on("myfoobar", _myFoobar)
 
@@ -106,6 +118,24 @@ const mysrvdemo = async function (srv) {
       return each.last_name + ', ' + each.first_name;
     })
   })
+
+
+  srv.on("moveUserToAnotherProject", async req => {
+    const {userId, projectId} = req.data;
+
+    const db = srv.transaction(req);
+    let {Users} = srv.entities;
+
+    return {
+      code:           100,
+      success:        true,
+      moveStatus:     "Post call successful!",
+      userId:         userId,
+      userName:       projectId,
+      projectId:      "",
+      projectName:    ""
+    };
+  }); 
 
 
   //Below method(.on) is to override the default Service implementation
