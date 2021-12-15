@@ -101,6 +101,22 @@ const mysrvdemo = async function (srv) {
     //console.log(`Target: ${req.target.name}`)
   //})
 
+  // // The below code shows a way to override the where clause
+  // // https://blogs.sap.com/2020/07/08/resolving-date-serialization-issues-when-using-an-external-odata-v2-service-with-cap/
+  // srv.on('READ','StudentSrv', (req, next) => {
+  //   console.log("Calling the Read of StudentSrv...");
+  //   if (typeof (req.query.SELECT.where) !== 'undefined' ) {
+  //     if ( req.query.SELECT.where.length > 2 &&
+  //          req.query.SELECT.where[2].val === '1@gmail.com' ) {
+  //       let first_val = req.query.SELECT.where[0].ref[0];
+  //       req.query.SELECT.where[0].ref[0] = `upper(${first_val})`;
+  //       req.query.SELECT.where[2].val = '2@GMAIL.COM';
+  //     }
+  //   }
+  //   return next();
+  // });
+
+
   // http://localhost:4004/mysrvdemoService/myfoobar(msg='Hi')
   srv.on("myfoobar", _myFoobar)
 
