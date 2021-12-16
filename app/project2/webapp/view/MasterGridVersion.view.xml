@@ -20,13 +20,11 @@
 					</smartFilterBar:layoutData>											   
 					<smartFilterBar:controlConfiguration>
 						<smartFilterBar:ControlConfiguration
-								key="email" mandatory="auto">
-						</smartFilterBar:ControlConfiguration>
+								key="email" mandatory="auto" index="0"/>
 					</smartFilterBar:controlConfiguration>
 					<smartFilterBar:controlConfiguration>
 						<smartFilterBar:ControlConfiguration
-								key="full_name" label="{i18n>MasterView.FullName}">
-						</smartFilterBar:ControlConfiguration>
+								key="full_name" label="{i18n>MasterView.FullName}"/>
 					</smartFilterBar:controlConfiguration>
 					<smartFilterBar:controlConfiguration>								 
 						<smartFilterBar:ControlConfiguration 

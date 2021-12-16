@@ -64,9 +64,9 @@ sap.ui.define([
 				dataType: "json",
 				async: false,				
 				success: function(res) {
-          that._countryCodeModel = new sap.ui.model.json.JSONModel();
-          that._countryCodeModel.setData(res.value);
-          that.byId("idCountryCode").setModel(that._countryCodeModel, "countryCode");
+          let countryCodeModel = that.getOwnerComponent().getModel("countryCode");
+          countryCodeModel.setData(res.value);
+          that.byId("idCountryCode").setModel(countryCodeModel, "countryCode");
 				},
 				error: function(e) {
 					console.log("error: "+e);

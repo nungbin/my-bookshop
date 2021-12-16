@@ -27,6 +27,10 @@ sap.ui.define([
 
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
+
+			//create a global accessible model
+			let countryCodeModel = new sap.ui.model.json.JSONModel();
+			this.setModel(countryCodeModel, "countryCode");
 		},
         destroy: function () {
             FakeLrepConnectorLocalStorage.disableFakeConnector();
