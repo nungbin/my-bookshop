@@ -80,6 +80,9 @@ sap.ui.define([
                   emphasizedAction: MessageBox.Action.NO,
                   onClose: function (oAction) {
                     if (oAction === 'YES') {
+                      //Drop changes which were bound previously using smart table
+                      //reference: https://stackoverflow.com/questions/42392802/how-to-undo-user-changes-in-a-form-that-has-been-bound-to-an-odata-model
+                      that.getOwnerComponent().getModel().updateBindings(true);
                       that.getOwnerComponent().getRouter().navTo("RouteRootView");
                     }
                   }
@@ -87,6 +90,7 @@ sap.ui.define([
               }
             }
             else{
+              this.getOwnerComponent().getModel().updateBindings(true);
               this.getOwnerComponent().getRouter().navTo("RouteRootView");
             }
         },
@@ -96,7 +100,7 @@ sap.ui.define([
             //var oDateFormat = sap.ui.core.format.DateFormat.getInstance({pattern: "yyyy-mm-dd"});
             let studentModel = this.getOwnerComponent().getModel(); //get the default oData model
             let objData      = JSON.parse(this._getStudentRecordfromScreen());
-            
+
             studentModel.update("/Students(email='" + objData.email + "')", 
                 objData, {
                   success: function(oData) {

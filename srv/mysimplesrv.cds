@@ -40,4 +40,7 @@ service mysrvdemo @(path:'/mysrvdemoService'){
         projectName:    String;
     }
     action moveUserToAnotherProject(userId: String, projectId: String) returns moveResult;
+
+    //type countryCode: String(3);
+    function getCountryCodes() returns array of String;
 }

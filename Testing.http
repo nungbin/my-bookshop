@@ -64,6 +64,10 @@ Content-Type: application/json
 
 
 ###
+GET http://localhost:4004/mysrvdemoService/getCountryCodes()
+
+
+###
 POST http://localhost:4004/mysrvdemoService/moveUserToAnotherProject
 Content-Type: application/json
 

@@ -102,6 +102,30 @@
 									</FlexBox>
 								</table:template>
 							</table:Column>
+
+							<table:Column
+								width="10rem"
+								sortProperty="country_code"
+								filterProperty="country_code">
+								<Label text="Country Code" />
+								<table:customData>
+									<core:CustomData key="p13nData"
+										value='\{"columnKey": "country_code", "autoColumnWidth": \{ "visibleProperty": "country_code" }, "leadingProperty": "country_code"}' />
+								</table:customData>
+								<table:template>
+									<ComboBox
+										id="idCountryCode"
+										items="{
+											path: 'countryCode>/', 
+											templateShareable:false
+										}"
+										selectedKey="{country_code}"
+										editable="false"
+									>
+										<core:ListItem key="{countryCode>code}" text="{countryCode>code}"/>
+									</ComboBox>
+								</table:template>
+							</table:Column>
 						</table:columns>
 					</table:Table>
 				</smartTable:SmartTable>	            

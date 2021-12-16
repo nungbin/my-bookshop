@@ -154,6 +154,22 @@ const mysrvdemo = async function (srv) {
   }); 
 
 
+  srv.on("getCountryCodes", async req => {
+    const service = await cds.connect.to('db');
+    const txService = service.tx(req);
+    const sql = 'select code from sap_common_Countries';
+
+    try {
+      const countryCode = await txService.run(sql);
+      return countryCode;
+    }
+    catch (error) {
+      //some errors
+      console.log(error);
+    }
+  });
+
+
   //Below method(.on) is to override the default Service implementation
   //srv.on("READ", "StudentSrv", _readStudentSrv);
   

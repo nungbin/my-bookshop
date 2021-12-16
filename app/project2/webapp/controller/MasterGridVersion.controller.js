@@ -20,7 +20,7 @@ sap.ui.define([
       oResultData  = [],
       sSelectString;
 
-	return Controller.extend("project2.project2.controller.Master", {
+	return Controller.extend("project2.project2.controller.MasterGridVersion", {
     formatter: formatter,
 
     onInit: function () {
@@ -46,10 +46,39 @@ sap.ui.define([
         .getRouter()
         .getRoute("RouteRootView")
         .attachPatternMatched(this.objectMatched, this);
-      ServiceManager.initJSONModel();
+      this._retrieveAllCountryCodes();  //retrieve a list of country codes
+      ServiceManager.initJSONModel(this);
       oStudentData = {};
       sSelectString = "";
     },
+
+
+    _retrieveAllCountryCodes: function() {
+			let that = this;
+			let url=`/mysrvdemoService/getCountryCodes()`; //this is a REST API call
+
+			$.ajax({
+				url: url,
+				type: 'GET',
+				contentType: "application/json",
+				dataType: "json",
+				async: false,				
+				success: function(res) {
+          that._countryCodeModel = new sap.ui.model.json.JSONModel();
+          that._countryCodeModel.setData(res.value);
+          that.byId("idCountryCode").setModel(that._countryCodeModel, "countryCode");
+				},
+				error: function(e) {
+					console.log("error: "+e);
+				}
+			});
+    },
+
+
+		handleLazyLoadCountryCodes: function(oControlEvent) {
+      this._retrieveAllCountryCodes();
+			//oControlEvent.getSource().getBinding("items").resume();
+		},    
 
     // this is triggered by, to ensure metadata gets loaded
     //		this.getOwnerComponent().getModel().metadataLoaded().then(this._onMetadataLoaded.bind(this));
@@ -155,10 +184,10 @@ sap.ui.define([
       let sPath = oEvent.getSource().getBindingContext().getPath();
       this._defaultODataModel.read(sPath, {
         success: function (data) {
-          console.log(data);
+          //console.log(data);
         },
         error: function (error) {
-          console.log(error);
+          //console.log(error);
         },
       });
 
@@ -381,7 +410,6 @@ sap.ui.define([
 
     _onBindingDataRequestedListener: function(oEvent) {
       //this event gets triggered first before DataReceived event
-      console.log(sSelectString);
       sSelectString = oEvent.getSource().mParameters.select;
     },
 
@@ -399,7 +427,7 @@ sap.ui.define([
       }else {
         var title = [];
         var data  = [];
-        debugger;
+
         rColumns.forEach(element => {
           if (element.visible) {
             title.push(element.title);
@@ -435,7 +463,7 @@ sap.ui.define([
 
 
     onAfterVariantApply: function(oEvent) {
-      debugger;
+
     },
 
     onSFBInitialise: function (oEvent) {},
