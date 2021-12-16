@@ -2,6 +2,7 @@
 		  xmlns:mvc="sap.ui.core.mvc"
 		  xmlns:table="sap.ui.table"
 		  xmlns:core="sap.ui.core"
+		  xmlns:dnd="sap.ui.core.dnd"
   	      xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
 		  xmlns:smartTable="sap.ui.comp.smarttable" 
 		  controllerName="project2.project2.controller.MasterGridVersion">
@@ -20,7 +21,7 @@
 					</smartFilterBar:layoutData>											   
 					<smartFilterBar:controlConfiguration>
 						<smartFilterBar:ControlConfiguration
-								key="email" mandatory="auto" index="0"/>
+								key="email" mandatory="auto" index="0" dragDropConfig=""/>
 					</smartFilterBar:controlConfiguration>
 					<smartFilterBar:controlConfiguration>
 						<smartFilterBar:ControlConfiguration
@@ -114,8 +115,9 @@
 									<ComboBox
 										id="idCountryCode"
 										items="{
-											path: 'countryCode>/', 
-											templateShareable:false
+											path:   'countryCode>/',
+											sorter: { path: 'code' },
+											templateShareable: false
 										}"
 										selectedKey="{country_code}"
 										editable="false"
