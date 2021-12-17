@@ -144,12 +144,14 @@
           "transition": "slide",
           "clearControlAggregation": false,
           "viewId": "Master",
-          "viewName": "MasterGridVersion"
+          "viewName": "MasterGridVersion",
+          "viewLevel": 1
         },
         "detail": {
           "viewType": "XML",
-          "transition": "slide",
-          "viewName": "Detail"
+          "transition": "flip",
+          "viewName": "Detail",
+          "viewLevel": 2
         }        
       }
     }
