@@ -22,3 +22,5 @@ annotate CatalogService.Books with {
 
 
 using from './project2/annotations';
+
+using from './hangman/annotations';
