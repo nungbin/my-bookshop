@@ -21,6 +21,14 @@ sap.ui.define([
         onAfterRendering: function() {
             ServiceManager.resetMan();
             ServiceManager.drawGallows();
+            ServiceManager.initAction();
+            //ServiceManager.drawParts(1);
+            //ServiceManager.drawParts(2);
+            //ServiceManager.drawParts(3);
+            //ServiceManager.drawParts(4);
+            //ServiceManager.drawParts(5);
+            //ServiceManager.drawParts(6);
+            //ServiceManager.drawParts(7);
         }
 	});
 });

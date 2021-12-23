@@ -3,20 +3,22 @@
     box-sizing: border-box;
   }
 
-  .equalColumns .columns {
-    min-height: 200px;
-  }
-  
-  .equalColumns .columns .sapMFlexItem {
-    padding: 0.5rem;
-  }
-
   .clsHangmanTitle {
     font-size: 300%;
+    color: aliceblue;
+  }
+
+  .guessWord {
+    color:blanchedalmond;
   }
 
   .canvas {
     background: #a0a0a0;
+    border-radius: 5px;
+  }
+
+  .submission {
+    background: #333;
     border-radius: 5px;
   }
 
