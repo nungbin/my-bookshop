@@ -1,0 +1,40 @@
+<mvc:View
+	controllerName="Project.Hangman.hangman.controller.Master"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+		<l:VerticalLayout width="100%" class="gridWrapper">
+			<l:Grid containerQuery="true"
+              defaultSpan="XL12 L12 M12 S12">
+        <Text
+            text="Hangman"
+            class="clsHangmanTitle display-1 text-center"
+            textAlign="Center"
+            width="100%"
+        >
+        </Text>
+      </l:Grid>
+			<l:Grid containerQuery="true"
+              defaultSpan="XL6 L6 M6 S6">
+				<html:div class="exampleDiv">
+        <html:canvas class="canvas" width="600" height="600"></html:canvas>
+
+        </html:div>
+				<html:div class="exampleDiv">
+          <Label text="test b" />
+          <html:div class="mb-3" style="line-height: 2">
+            <html:p id="answer" class="display-4 mb-5">_ _ _ _</html:p>
+            <html:label for="guessInput" class="form-label">
+              Guess a letter and click submit
+            </html:label>
+            <html:br />
+          </html:div>
+        </html:div>
+			</l:Grid>
+		</l:VerticalLayout>
+</mvc:View>

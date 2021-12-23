@@ -1,1 +1,56 @@
 /* Enter your custom styles here */
+* {
+    box-sizing: border-box;
+  }
+
+  .equalColumns .columns {
+    min-height: 200px;
+  }
+  
+  .equalColumns .columns .sapMFlexItem {
+    padding: 0.5rem;
+  }
+
+  .clsHangmanTitle {
+    font-size: 300%;
+  }
+
+  .canvas {
+    background: #a0a0a0;
+    border-radius: 5px;
+  }
+
+  /* body {
+    background: #333;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+  } */
+
+  /* #canvas {
+    -moz-transition: background 0.5s ease-in;
+    -o-transition: background 0.5s ease-in;
+    -webkit-transition: background 0.5s ease-in;
+    background: #a0a0a0;
+    border-radius: 5px;
+    max-width: 94vw;
+  } */
+
+  /* #guessInput {
+    font-size: xx-large;
+    width: 70px;
+  } */
+
+  /* form {
+    height: 600px;
+    border-radius: 5px;
+  } */
+
+  /* #feedback {
+    height: 50px;
+  } */
