@@ -13,6 +13,7 @@ sap.ui.define([
          */
         onInit: function() {
             //Controller.prototype.onInit.apply(this, arguments);
+            ServiceManager.callInitGame(this);
         },
 
         /**

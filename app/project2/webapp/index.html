@@ -9,12 +9,20 @@
             window['sap-ushell-config'] = {
                 defaultRenderer: 'fiori2',
                 applications: {
-                    'fe-lrop-v4': {
+                    "lms-app": {  //there has to be a '-' in between otherwise it will not work, giving some hash error
                         title: 'Student Learning Management System',
                         description: 'Student Learning Management System.',
-                        additionalInformation: 'SAPUI5.Component=project2',
+                        additionalInformation: 'SAPUI5.Component=project2.project2',
                         applicationType: 'URL',
                         url: './',
+                        navigationMode: 'embedded'
+                    },
+                    "hangman-app": {
+                        title: 'Hangman',
+                        description: 'Hangman',
+                        additionalInformation: 'SAPUI5.Component=Project.Hangman.hangman',
+                        applicationType: 'URL',
+                        url: '../../hangman/webapp/',
                         navigationMode: 'embedded'
                     }
                 }

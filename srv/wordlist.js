@@ -52,6 +52,7 @@ const wordListSrvImplementation = async function (srv) {
 
     srv.on("initGame", () => {
       pickedWord = "";
+      counter = 0;
       return true;
     });
 

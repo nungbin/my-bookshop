@@ -6,6 +6,25 @@ sap.ui.define([
     var ctx;
 
 	return {
+        callInitGame: function(me) {
+			let that = me;
+			let url=`/wordlistsrv/initGame()`; //this is a REST API call
+
+			$.ajax({
+				url: url,
+				type: 'GET',
+				contentType: "application/json",
+				dataType: "json",
+				async: false,				
+				success: function(res) {
+                    console.log("call InitGame() successfullly.");
+				},
+				error: function(e) {
+					console.log("error: "+e);
+				}
+			});            
+        },
+
         initAction: function() {
             $("form").on("submit", function (e) {
                 e.preventDefault();
