@@ -82,8 +82,22 @@ GET http://localhost:4004/wordlistsrv/wordList
 
 
 ###
+http://localhost:4004/wordlistsrv/initGame()
+
+###
 http://localhost:4004/wordlistsrv/getNoOfWords()
 
 
 ###
+http://localhost:4004/wordlistsrv/pickRandomWord()
+
+###
 http://localhost:4004/wordlistsrv/getWord(rowNum=5)
+
+
+###
+http://localhost:4004/wordlistsrv/returnChosenWord()
+
+
+###
+http://localhost:4004/wordlistsrv/compareWords(enteredWord='test')
