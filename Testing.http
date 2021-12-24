@@ -76,3 +76,14 @@ Content-Type: application/json
 	"projectId":    "abcde"
 }
 
+
+###
+GET http://localhost:4004/wordlistsrv/wordList
+
+
+###
+http://localhost:4004/wordlistsrv/getNoOfWords()
+
+
+###
+http://localhost:4004/wordlistsrv/getWord(rowNum=5)
