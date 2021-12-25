@@ -51,7 +51,7 @@
                        submit=".onInputSubmit"/>
               </html:div>
 
-              <html:p class="display-6 mt-5 my-3" id="feedback"></html:p>
+              <Label text="" width="100%" id="lblFeedback"/>
               <html:br />
               <html:br />
               <html:br />

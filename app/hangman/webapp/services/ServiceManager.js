@@ -104,7 +104,7 @@ sap.ui.define([
         },
 
 
-        compareWords: function(enteredWord) {
+        compareWords: function(enteredWord, me) {
             return new Promise(function(resolve,reject) {
                 var that = me;
                 let url=`/wordlistsrv/compareWords(enteredWord='${enteredWord}')`; //this is a REST API call
@@ -133,7 +133,7 @@ sap.ui.define([
                 const guess = $(".guessInput").val();
                 console.log(`${guess} submitted!!!`);
                 $(".guessInput").val("");
-                ServiceManager.compareWords(guess);
+                //ServiceManager.compareWords(guess);
             });
         },
 

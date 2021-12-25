@@ -92,12 +92,11 @@ http://localhost:4004/wordlistsrv/getNoOfWords()
 http://localhost:4004/wordlistsrv/pickRandomWord()
 
 ###
-http://localhost:4004/wordlistsrv/getWord(rowNum=5)
-
-
-###
 http://localhost:4004/wordlistsrv/returnChosenWord()
 
 
 ###
-http://localhost:4004/wordlistsrv/compareWords(enteredWord='test')
+http://localhost:4004/wordlistsrv/compareWords(enteredWord='v')
+
+###
+http://localhost:4004/wordlistsrv/getWord(rowNum=5)

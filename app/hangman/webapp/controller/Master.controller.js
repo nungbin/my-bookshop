@@ -50,6 +50,8 @@ sap.ui.define([
         onAfterRendering: function() {
             var that = this;
 
+            this.byId("lblEncryptedWord").setText("_ _ _ _");
+            this.byId("lblFeedback").setText("");
             ServiceManager.resetMan();
             ServiceManager.drawGallows();
             //set initial focus
@@ -68,9 +70,47 @@ sap.ui.define([
         },
 
         onInputSubmit: function(e) {
+            var that = this;
             const id = e.getParameter("id"); 
-            alert(this.byId(id).getValue());
+            const enteredWord = this.byId(id).getValue();
             this.byId(id).setValue("");
+
+            ServiceManager.compareWords(enteredWord, this)
+                .then(function (res) {
+                    debugger;
+                    let feedback = that.byId("lblFeedback").getText();
+                    if (feedback === '') {
+                        feedback = enteredWord.toUpperCase();
+                    }
+                    else {
+                        feedback = feedback + ', ' + enteredWord.toUpperCase();
+                    }
+                    that.byId("lblFeedback").setText(feedback);
+                    that.byId("lblEncryptedWord").setText(res.value.encryptedArray);
+                    if (res.value.won) {
+                        setTimeout(() => {
+                            alert("You won! Game will be restarting...");
+                            setTimeout(() => {
+                                that.onInit();
+                                that.onAfterRendering();    
+                            }, 1000);
+                        }, 200);
+                    }
+                    else if (res.value.gameOver) {
+                        ServiceManager.drawParts(res.value.incorrectCounter);
+                        setTimeout(() => {
+                            alert("You suck! Game will be restarting");
+                            that.onInit();
+                            that.onAfterRendering();
+                        }, 250);
+                    }
+                    else {
+                        ServiceManager.drawParts(res.value.incorrectCounter);
+                    }
+                })
+                .catch(function(msg) {
+                    console.log(msg);
+                });
         }
 	});
 });

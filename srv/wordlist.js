@@ -53,14 +53,20 @@ async function _pickRandomWord(req, noOfWords) {
 
 
 const wordListSrvImplementation = async function (srv) {
-    var pickedWord,
-        noOfWords,
-        counter;
+    var _pickedWord,
+        _noOfWords,
+        _totalCount,
+        _encryptedArray,
+        _tries,
+        _incorrectCounter;
 
     srv.on("initGame", () => {
-      pickedWord = "";
-      noOfWords = 0;
-      counter = 0;
+      _pickedWord = "";
+      _noOfWords = 0;
+      _incorrectCounter = 0;
+      _totalCount = 7;
+      _tries = 0;
+      _encryptedArray = "";
       return true;
     });
 
@@ -70,8 +76,8 @@ const wordListSrvImplementation = async function (srv) {
       let response = await _getNoOfWords(req);
       if (typeof response != 'undefined') {
         if (response[0]["Count(1)"] > 0) {
-          noOfWords = response[0]["Count(1)"];
-          console.log("No of words: ", noOfWords);
+          _noOfWords = response[0]["Count(1)"];
+          console.log("No of words: ", _noOfWords);
           return true;
         }
       }
@@ -80,34 +86,70 @@ const wordListSrvImplementation = async function (srv) {
 
 
     srv.on("pickRandomWord", async req => {
-      if (noOfWords > 0) {
-        pickedWord = await _pickRandomWord(req, noOfWords);
-        if (pickedWord === "") {
-          console.log("picked word: ", pickedWord);
+      if (_noOfWords > 0) {
+        _pickedWord = await _pickRandomWord(req, _noOfWords);
+        if (_pickedWord === "") {
+          console.log("picked word: ", _pickedWord);
           return false;
         }
         else {
-          console.log("picked word: ", pickedWord);
+          console.log("picked word: ", _pickedWord);
           return true;
         }  
       }
-      console.log("picked word: ", pickedWord);
+      console.log("picked word: ", _pickedWord);
       return false;
     });
 
     srv.on("returnChosenWord", () => {
-      console.log("picked word: ", pickedWord);
-      let encryptedArray = pickedWord.split('');
+      console.log("picked word: ", _pickedWord);
+      let encryptedArray = _pickedWord.split('');
       encryptedArray = encryptedArray.map(e => '_');
+      _encryptedArray = encryptedArray;
       encryptedArray = encryptedArray.join(' ');
       console.log("encrypted word: ", encryptedArray.toString());
       return encryptedArray.toString();
     });
 
     srv.on("compareWords", (req) => {
+      let matched = false;
       const { enteredWord } = req.data;
+      const response = {};
+
       console.log(enteredWord);
-      return enteredWord;
+      let originalArray = _pickedWord.split('');
+      if (originalArray.includes(enteredWord)) {
+        matched = true;
+        for (let i=0 ; i<originalArray.length ; i++) {
+          if (_encryptedArray[i] === '_') {
+            if (originalArray[i].toLowerCase() === enteredWord.toLowerCase()) {
+              _encryptedArray[i] = originalArray[i];
+            }
+          }
+        }  
+      }
+      if (!_encryptedArray.includes('_')) {
+        response.won          = true;
+        response.gameOver     = false;
+        response.originalWord = _pickedWord;
+      }
+      else {
+        response.won            = false;
+        if (matched === false) {
+          _incorrectCounter++;          
+          response.gameOver     = false;
+          response.originalWord = '';
+          if (_incorrectCounter >= _totalCount) {
+            response.gameOver     = true;
+            response.originalWord = _pickedWord;
+          }
+        }
+      }
+      response.incorrectCounter = _incorrectCounter;
+      response.encryptedArray   = _encryptedArray.join(' ');
+      console.log(response);
+
+      return response;
     });
 
     //http://localhost:4004/wordlistsrv/getWord(rowNum=3)
