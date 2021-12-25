@@ -1,5 +1,7 @@
 sap.ui.define([
+    "./ServiceManager"
 ], function(
+    ServiceManager
 ) {
 	"use strict";
     var canvas;
@@ -7,28 +9,131 @@ sap.ui.define([
 
 	return {
         callInitGame: function(me) {
-			let that = me;
-			let url=`/wordlistsrv/initGame()`; //this is a REST API call
+            return new Promise(function(resolve,reject) {
+                var that = me;
+                let url=`/wordlistsrv/initGame()`; //this is a REST API call
+    
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,				
+                    success: function(res) {
+                        console.log("call InitGame() successfullly.");
+                        resolve(res);
+                    },
+                    error: function(e) {
+                        console.log("error: "+e);
+                        reject(e);
+                    }
+                });    
+            });
+        },
 
-			$.ajax({
-				url: url,
-				type: 'GET',
-				contentType: "application/json",
-				dataType: "json",
-				async: false,				
-				success: function(res) {
-                    console.log("call InitGame() successfullly.");
-				},
-				error: function(e) {
-					console.log("error: "+e);
-				}
-			});            
+
+        initNoOfWords: function(me) {
+            return new Promise(function(resolve,reject) {
+                var that = me;
+                let url=`/wordlistsrv/getNoOfWords()`; //this is a REST API call
+    
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,				
+                    success: function(res) {
+                        console.log("call getNoOfWords() successfullly.");
+                        resolve(res);
+                    },
+                    error: function(e) {
+                        console.log("error: "+e);
+                        reject(e);
+                    }
+                });    
+            });
+        },
+
+
+        pickRandomWord: function(me) {
+            return new Promise(function(resolve,reject) {
+                var that = me;
+                let url=`/wordlistsrv/pickRandomWord()`; //this is a REST API call
+    
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,				
+                    success: function(res) {
+                        console.log("call pickRandomWord() successfullly.");
+                        resolve(res);
+                    },
+                    error: function(e) {
+                        console.log("error: "+e);
+                        reject(e);
+                    }
+                });    
+            });
+        },
+
+
+        returnChosenWord: function(me) {
+            return new Promise(function(resolve,reject) {
+                var that = me;
+                let url=`/wordlistsrv/returnChosenWord()`; //this is a REST API call
+    
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,				
+                    success: function(res) {
+                        console.log("call returnChosenWord() successfullly.");
+                        resolve(res);
+                    },
+                    error: function(e) {
+                        console.log("error: "+e);
+                        reject(e);
+                    }
+                });    
+            });
+        },
+
+
+        compareWords: function(enteredWord) {
+            return new Promise(function(resolve,reject) {
+                var that = me;
+                let url=`/wordlistsrv/compareWords(enteredWord='${enteredWord}')`; //this is a REST API call
+    
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    contentType: "application/json",
+                    dataType: "json",
+                    async: true,				
+                    success: function(res) {
+                        console.log("call compareWords() successfullly.");
+                        resolve(res);
+                    },
+                    error: function(e) {
+                        console.log("error: "+e);
+                        reject(e);
+                    }
+                });    
+            });
         },
 
         initAction: function() {
             $("form").on("submit", function (e) {
                 e.preventDefault();
-                alert("Submitted!!!");
+                const guess = $(".guessInput").val();
+                console.log(`${guess} submitted!!!`);
+                $(".guessInput").val("");
+                ServiceManager.compareWords(guess);
             });
         },
 

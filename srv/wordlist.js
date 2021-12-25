@@ -37,7 +37,7 @@ async function _getWord(req, rowNum) {
 
   try {
     const word = await txService.run(sql);
-    return word;
+    return word[0].word;
   }
   catch (error) {
     //some errors
@@ -46,12 +46,20 @@ async function _getWord(req, rowNum) {
 }
 
 
+async function _pickRandomWord(req, noOfWords) {
+  const word = await _getWord(req, _getRandomInt(noOfWords));
+  return word;
+}
+
+
 const wordListSrvImplementation = async function (srv) {
-    var pickedWord="",
-        counter=0;
+    var pickedWord,
+        noOfWords,
+        counter;
 
     srv.on("initGame", () => {
       pickedWord = "";
+      noOfWords = 0;
       counter = 0;
       return true;
     });
@@ -59,56 +67,76 @@ const wordListSrvImplementation = async function (srv) {
 
     //http://localhost:4004/wordlistsrv/getNoOfWords()
     srv.on("getNoOfWords", async req => {
-      //const noOfWords = await _getNoOfWords(req);
-      //return noOfWords;
-      //console.log(_getRandomInt(noOfWords[0]["Count(1)"]));
-      return true;
+      let response = await _getNoOfWords(req);
+      if (typeof response != 'undefined') {
+        if (response[0]["Count(1)"] > 0) {
+          noOfWords = response[0]["Count(1)"];
+          console.log("No of words: ", noOfWords);
+          return true;
+        }
+      }
+      return false;
     });
 
-    //http://localhost:4004/wordlistsrv/getWord(rowNum=3)
-    srv.on("getWord", async req => {
-        const { rowNum } = req.data;
-
-        const service = await cds.connect.to('db');
-        const txService = service.tx(req);
-        const sql = "SELECT word FROM (" + 
-                    "  SELECT " +
-                    "    ROW_NUMBER() OVER ( " +
-                    "      ORDER BY word " +
-                    "    ) RowNum, " +
-                    "    word " +
-                    "  FROM " +
-                    "    'wordlist_wordlist' " +
-                    "  Order by word " +
-                    ")" +
-                    "where RowNum = " + rowNum;
-    
-        try {
-          const word = await txService.run(sql);
-          return word;
-        }
-        catch (error) {
-          //some errors
-          console.log(error);
-        }
-    });
 
     srv.on("pickRandomWord", async req => {
-      const noOfWords = await _getNoOfWords(req);
-      const word = await _getWord(req, _getRandomInt(noOfWords[0]["Count(1)"]));
-
-      pickedWord = word;
-      return true;
+      if (noOfWords > 0) {
+        pickedWord = await _pickRandomWord(req, noOfWords);
+        if (pickedWord === "") {
+          console.log("picked word: ", pickedWord);
+          return false;
+        }
+        else {
+          console.log("picked word: ", pickedWord);
+          return true;
+        }  
+      }
+      console.log("picked word: ", pickedWord);
+      return false;
     });
 
     srv.on("returnChosenWord", () => {
-      return pickedWord;
+      console.log("picked word: ", pickedWord);
+      let encryptedArray = pickedWord.split('');
+      encryptedArray = encryptedArray.map(e => '_');
+      encryptedArray = encryptedArray.join(' ');
+      console.log("encrypted word: ", encryptedArray.toString());
+      return encryptedArray.toString();
     });
 
     srv.on("compareWords", (req) => {
       const { enteredWord } = req.data;
+      console.log(enteredWord);
       return enteredWord;
-    })
-}
+    });
+
+    //http://localhost:4004/wordlistsrv/getWord(rowNum=3)
+    srv.on("getWord", async req => {
+      const { rowNum } = req.data;
+
+      const service = await cds.connect.to('db');
+      const txService = service.tx(req);
+      const sql = "SELECT word FROM (" + 
+                  "  SELECT " +
+                  "    ROW_NUMBER() OVER ( " +
+                  "      ORDER BY word " +
+                  "    ) RowNum, " +
+                  "    word " +
+                  "  FROM " +
+                  "    'wordlist_wordlist' " +
+                  "  Order by word " +
+                  ")" +
+                  "where RowNum = " + rowNum;
+  
+      try {
+        const word = await txService.run(sql);
+        return word;
+      }
+      catch (error) {
+        //some errors
+        console.log(error);
+      }
+    });
+  }
 
 module.exports = wordListSrvImplementation;

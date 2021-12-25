@@ -31,10 +31,6 @@
         </html:div>
 
         <html:div class="col-sm">
-          <html:form
-            class="text-light p-3 border border-info align-items-end"
-            autocomplete="off"
-          >
             <html:br />
             <html:br />
             <html:br />
@@ -42,33 +38,19 @@
             <html:br />
             <html:br />
             <html:div class="mb-3" style="line-height: 2">
-              <html:p id="answer" class="display-4 mb-5">_ _ _ _</html:p>
-              <html:label for="guessInput" class="form-label">
-                Guess a letter and click submit
-              </html:label>
+              <Label text="_ _ _ _" width="100%" id="lblEncryptedWord"/>
+              <Label text="Guess a letter and hit Enter" width="100%" id="__label2"/>
               <html:br />
 
-              <html:div
-                class="d-flex align-baseline justify-content-between"
-                style="width: 400"
-              >
-                <html:input
-                  name="guessInput"
-                  type="text"
-                  class="form-control text-center mr-5"
-                  id="guessInput"
-                  maxlength="1"
-                  style="text-transform: uppercase"
-                  onkeypress="return /[a-z]/i.test(event.key)"
-                />
-
-                <html:button
-                  type="submit"
-                  class="btn btn-primary ml-5 mb-0 align-self-end"
-                >
-                  Submit
-                </html:button>
+              <html:div>
+                <Input width="1em" 
+                       id="guessInput" 
+                       value="" 
+                       fieldWidth="100%" 
+                       maxLength="1"
+                       submit=".onInputSubmit"/>
               </html:div>
+
               <html:p class="display-6 mt-5 my-3" id="feedback"></html:p>
               <html:br />
               <html:br />
@@ -76,7 +58,6 @@
               <html:br />
               <html:br />
             </html:div>
-          </html:form>
         </html:div>
 			</l:Grid>
 		</l:VerticalLayout>
