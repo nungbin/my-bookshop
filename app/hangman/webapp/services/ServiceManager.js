@@ -20,7 +20,7 @@ sap.ui.define([
                     dataType: "json",
                     async: true,				
                     success: function(res) {
-                        console.log("call InitGame() successfullly.");
+                        //console.log("call InitGame() successfullly.");
                         resolve(res);
                     },
                     error: function(e) {
@@ -44,7 +44,7 @@ sap.ui.define([
                     dataType: "json",
                     async: true,				
                     success: function(res) {
-                        console.log("call getNoOfWords() successfullly.");
+                        //console.log("call getNoOfWords() successfullly.");
                         resolve(res);
                     },
                     error: function(e) {
@@ -68,7 +68,7 @@ sap.ui.define([
                     dataType: "json",
                     async: true,				
                     success: function(res) {
-                        console.log("call pickRandomWord() successfullly.");
+                        //console.log("call pickRandomWord() successfullly.");
                         resolve(res);
                     },
                     error: function(e) {
@@ -92,7 +92,7 @@ sap.ui.define([
                     dataType: "json",
                     async: true,				
                     success: function(res) {
-                        console.log("call returnChosenWord() successfullly.");
+                        //console.log("call returnChosenWord() successfullly.");
                         resolve(res);
                     },
                     error: function(e) {
@@ -116,7 +116,7 @@ sap.ui.define([
                     dataType: "json",
                     async: true,				
                     success: function(res) {
-                        console.log("call compareWords() successfullly.");
+                        //console.log("call compareWords() successfullly.");
                         resolve(res);
                     },
                     error: function(e) {
@@ -125,6 +125,21 @@ sap.ui.define([
                     }
                 });    
             });
+        },
+
+
+        validateGuessInput: function(me, e) {
+            const id = e.getParameter("id");
+            const guess = e.getParameter("value");
+            //e.getParameter("newValue")
+            if (!/^[a-zA-Z]$/.test(guess)) {
+                me.byId(id).setValueState(sap.ui.core.ValueState.Error);
+                me.byId(id).setValueStateText("Please enter only one alpha character.");
+                return false;
+            }
+            me.byId(id).setValueState(sap.ui.core.ValueState.None);
+            me.byId(id).setValueStateText("");
+            return true;
         },
 
         initAction: function() {

@@ -8,6 +8,16 @@
     color: aliceblue;
   }
 
+
+  .guessLabel {
+    color: white;
+    font-size: 180%
+  }
+
+  .guessInput {
+    font-size: 120%
+  }
+
   .guessWord {
     color:blanchedalmond;
   }

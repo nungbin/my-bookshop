@@ -38,23 +38,26 @@
             <html:br />
             <html:br />
             <html:div class="mb-3" style="line-height: 2">
-              <Label text="_ _ _ _" width="100%" id="lblEncryptedWord"/>
-              <Label text="Guess a letter and hit Enter" width="100%" id="__label2"/>
+              <Label class="guessLabel" text="_ _ _ _" width="100%" id="lblEncryptedWord"/>
+              <Label class="guessLabel" text="Guess a letter and hit Enter" width="100%" id="__label2"/>
               <html:br />
 
               <html:div>
                 <Input width="1em" 
-                       id="guessInput" 
+                       class="guessInput"
+                       id="guessInput"
+                       required="true"
+                       liveChange=".onLiveChange" 
                        value="" 
                        fieldWidth="100%" 
                        maxLength="1"
                        submit=".onInputSubmit"/>
               </html:div>
 
-              <Label text="" width="100%" id="lblFeedback"/>
               <html:br />
               <html:br />
               <html:br />
+              <Label class="guessLabel" text="" width="100%" id="lblFeedback"/>
               <html:br />
               <html:br />
             </html:div>

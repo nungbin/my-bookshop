@@ -1,8 +1,10 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+    "sap/m/MessageToast",
     "../services/ServiceManager"
 ], function(
 	Controller,
+    MessageToast,
     ServiceManager
 ) {
 	"use strict";
@@ -69,15 +71,22 @@ sap.ui.define([
             //ServiceManager.drawParts(7);
         },
 
+
+        onLiveChange: function(e) {
+            ServiceManager.validateGuessInput(this, e);
+        },
+
         onInputSubmit: function(e) {
             var that = this;
             const id = e.getParameter("id"); 
             const enteredWord = this.byId(id).getValue();
+            if (ServiceManager.validateGuessInput(this, e) === false) {
+                return;
+            }
             this.byId(id).setValue("");
 
             ServiceManager.compareWords(enteredWord, this)
                 .then(function (res) {
-                    debugger;
                     let feedback = that.byId("lblFeedback").getText();
                     if (feedback === '') {
                         feedback = enteredWord.toUpperCase();
@@ -89,20 +98,36 @@ sap.ui.define([
                     that.byId("lblEncryptedWord").setText(res.value.encryptedArray);
                     if (res.value.won) {
                         setTimeout(() => {
-                            alert("You won! Game will be restarting...");
-                            setTimeout(() => {
-                                that.onInit();
-                                that.onAfterRendering();    
-                            }, 1000);
-                        }, 200);
+                            MessageToast.show("You won! Game will be restarting in 2 seconds...", {
+                                duration: 2000,
+                                onClose: () => {
+                                    that.onInit();
+                                    that.onAfterRendering();
+                                }
+                            });
+                            //alert("You won! Game will be restarting...");
+                            // setTimeout(() => {
+                            //     that.onInit();
+                            //     that.onAfterRendering();    
+                            // }, 1000);
+                        }, 100);
                     }
                     else if (res.value.gameOver) {
                         ServiceManager.drawParts(res.value.incorrectCounter);
                         setTimeout(() => {
-                            alert("You suck! Game will be restarting");
-                            that.onInit();
-                            that.onAfterRendering();
-                        }, 250);
+                            MessageToast.show(`Sorry, you lost! The word was '${res.value.originalWord}' \n\rGame will be restarting in 5 seconds...`, {
+                                duration: 5000,
+                                onClose: () => {
+                                    that.onInit();
+                                    that.onAfterRendering();
+                                }
+                            });
+                            //alert("You won! Game will be restarting...");
+                            // setTimeout(() => {
+                            //     that.onInit();
+                            //     that.onAfterRendering();    
+                            // }, 1000);
+                        }, 100);
                     }
                     else {
                         ServiceManager.drawParts(res.value.incorrectCounter);
