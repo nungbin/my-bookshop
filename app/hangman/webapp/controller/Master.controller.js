@@ -28,6 +28,14 @@ sap.ui.define([
             //        });
             var that = this;
 
+            //https://answers.sap.com/questions/13422236/hide-launchpad-navigation-bar.html
+            //  we hide the launchpad header bar
+            if (sap.ushell !== undefined) {
+                if (sap.ushell.Container.getRenderer("fiori2")) {
+                    sap.ushell.Container.getRenderer("fiori2").setHeaderVisibility(false, true);
+                }    
+            }
+
             ServiceManager.callInitGame(this)
                 .then(function (res) {
                     return ServiceManager.initNoOfWords(this);
