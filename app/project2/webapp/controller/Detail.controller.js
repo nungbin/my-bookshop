@@ -211,6 +211,8 @@ sap.ui.define([
           this._UIControlJSONModel.setProperty("/deleteStudentDetail", false);
           this._UIControlJSONModel.setProperty("/downloadStudentPDF",  false);
           this._UIControlJSONModel.setProperty("/editToggle", false);
+          //make form read-only during PDF print
+          this.byId("sfDetail").setEditable(false);
 
           setTimeout(function() {
             var win = window.open("", "PrintWindow");
