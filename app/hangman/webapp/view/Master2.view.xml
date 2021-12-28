@@ -1,0 +1,68 @@
+<mvc:View
+	controllerName="Project.Hangman.hangman.controller.Master2"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+	<ScrollContainer
+		height="100%"
+		width="100%"
+		vertical="true">
+		<l:VerticalLayout width="100%" class="submission">
+			<l:Grid containerQuery="true"
+              defaultSpan="XL12 L12 M12 S12">
+        <Text
+            text="Hangman"
+            class="clsHangmanTitle display-1 text-center"
+            textAlign="Center"
+            width="100%"
+        />
+      </l:Grid>
+
+			<l:Grid containerQuery="true"
+              defaultSpan="XL6 L6 M6 S6">
+				<html:div class="exampleDiv">
+          <html:canvas class="canvas2" ></html:canvas>
+          <html:p class="text-center guessWord">Guess the word before it's too late!</html:p>
+        </html:div>
+
+        <html:div class="col-sm">
+          <html:br />
+          <html:br />
+          <html:br />
+          <html:br />
+          <html:br />
+          <html:br />
+          <html:div class="mb-3" style="line-height: 2">
+            <Label class="guessLabel" text="_ _ _ _" width="100%" id="lblEncryptedWord"/>
+            <Label class="guessLabel" text="Guess a letter and hit Enter" width="100%" id="__label2"/>
+            <html:br />
+
+            <html:div>
+              <Input width="1em" 
+                      class="guessInput"
+                      id="guessInput"
+                      required="true"
+                      liveChange=".onLiveChange" 
+                      value="" 
+                      fieldWidth="100%" 
+                      maxLength="1"
+                      submit=".onInputSubmit"/>
+            </html:div>
+
+            <html:br />
+            <html:br />
+            <html:br />
+            <Label class="guessLabel" text="" width="100%" id="lblFeedback"/>
+            <html:br />
+            <html:br />
+          </html:div>
+        </html:div>
+			</l:Grid>
+		</l:VerticalLayout>
+    </ScrollContainer>
+</mvc:View>

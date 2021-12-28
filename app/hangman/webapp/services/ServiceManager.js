@@ -132,6 +132,11 @@ sap.ui.define([
             const id = e.getParameter("id");
             const guess = e.getParameter("value");
             //e.getParameter("newValue")
+            if (guess.length > 1) {
+                me.byId(id).setValueState(sap.ui.core.ValueState.Error);
+                me.byId(id).setValueStateText("Please enter only one alpha character.");
+                return false;
+            }
             if (!/^[a-zA-Z]$/.test(guess)) {
                 me.byId(id).setValueState(sap.ui.core.ValueState.Error);
                 me.byId(id).setValueStateText("Please enter only one alpha character.");
@@ -156,6 +161,8 @@ sap.ui.define([
             canvas = document.querySelector(".canvas");
             ctx = canvas.getContext("2d");
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
+            ctx.globalCompositeOperation = 'destination-over';
         },
 
         drawGallows: function() {

@@ -25,6 +25,15 @@
   .canvas {
     background: #a0a0a0;
     border-radius: 5px;
+    z-index: -1;
+  }
+
+  .div1 {
+    z-index: 0;
+  }
+
+  .div2 {
+    z-index: 10;
   }
 
   .submission {

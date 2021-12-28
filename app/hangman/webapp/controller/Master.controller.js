@@ -60,6 +60,15 @@ sap.ui.define([
         onAfterRendering: function() {
             var that = this;
 
+            //set canvas width and height
+            //const p = $(".div2").position();
+            const p = document.querySelector('.div2');
+            const canvas = document.querySelector(".canvas");
+            //canvas.width  = 580;
+            //canvas.height = 600;
+            canvas.width  = p.offsetWidth;
+            canvas.height = p.offsetHeight;
+
             this.byId("lblEncryptedWord").setText("_ _ _ _");
             this.byId("lblFeedback").setText("");
             ServiceManager.resetMan();
@@ -68,15 +77,17 @@ sap.ui.define([
             setTimeout(() => {
                 that.byId("guessInput").focus();
             }, 200);
-            
-            //ServiceManager.initAction();
-            //ServiceManager.drawParts(1);
-            //ServiceManager.drawParts(2);
-            //ServiceManager.drawParts(3);
-            //ServiceManager.drawParts(4);
-            //ServiceManager.drawParts(5);
-            //ServiceManager.drawParts(6);
-            //ServiceManager.drawParts(7);
+
+            $(window).resize(function() {
+                //trigger the window resize event
+                // const p = document.querySelector('.div2');
+                // const canvas = document.querySelector(".canvas");
+
+                // canvas.width  = p.offsetWidth;
+                // canvas.height = p.offsetHeight;                        
+                // ServiceManager.resetMan();
+                // ServiceManager.drawGallows();
+            });
         },
 
 
