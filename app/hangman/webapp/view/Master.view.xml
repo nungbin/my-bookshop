@@ -53,6 +53,11 @@
           <html:br />
           <html:br />
           <html:br />
+          <html:br />
+          <html:br />
+          <html:br />
+          <html:br />
+          <html:br />          
           <Label class="guessLabel" text="" width="100%" id="lblFeedback"/>
           <html:br />
           <html:br />
