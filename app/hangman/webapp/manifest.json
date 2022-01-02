@@ -102,13 +102,23 @@
         }        
       ],
       "targets": {
+				"splitscreenTarget": {
+					"viewName": "SplitScreen",
+					"viewId": "splitView"
+				},
+
         "master": {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
           "viewId": "Master",
           "viewName": "Master",
-          "viewLevel": 1
+          "viewLevel": 1,
+
+					"parent": "splitscreenTarget",
+					"controlId": "splitContainer",          
+          "controlAggregation": "detailPages"
+
         },
         "detail": {
           "viewType": "XML",
