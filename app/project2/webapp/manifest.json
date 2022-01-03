@@ -144,7 +144,7 @@
           "transition": "slide",
           "clearControlAggregation": false,
           "viewId": "Master",
-          "viewName": "MasterGridVersion",
+          "viewName": "MasterBlockVersion",
           "viewLevel": 1
         },
         "detail": {
