@@ -3,7 +3,6 @@
 		  xmlns:mvc="sap.ui.core.mvc"
 		  xmlns:table="sap.ui.table"
 		  xmlns:core="sap.ui.core"
-		  xmlns:dnd="sap.ui.core.dnd"
   	      xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
 		  xmlns:smartTable="sap.ui.comp.smarttable" 
 		  controllerName="project2.project2.controller.MasterBlockVersion">
@@ -52,18 +51,15 @@
 				</smartFilterBar:SmartFilterBar>
 			</VBox>
 
-			<ScrollContainer 
-				height="100%"
-				width="100%"
-				vertical="true"
-			>
+			<Page showHeader="false">
+			<content>
 				<layout:BlockLayout background="Dashboard">
 					<layout:BlockLayoutRow
 						id="idStudentBlockData"
 						content="{StudentBlockData>/}"
 					>
 						<layout:content>
-							<layout:BlockLayoutCell 
+							<layout:BlockLayoutCell class="clBlockLayoutCell"
 							>
 								<layout:Grid
 									defaultSpan="XL12 L12 M12 S12"
@@ -80,16 +76,38 @@
 										</layout:VerticalLayout>
 									</FlexBox>
 
+									<FlexBox
+										renderType="Bare"
+										justifyContent="Center">
+										<Image
+											src="./images/HT-1000.jpg"
+											densityAware="true"
+											width="50%"
+											height="50%"/>
+									</FlexBox>
+									<Button
+										icon="sap-icon://cart-3"
+										text="{StudentBlockData>last_name}"
+										type="Emphasized">
+										<layoutData>
+											<layout:GridData span="XL4 L4 M4 S4" />
+										</layoutData>
+									</Button>
+
 									<ObjectListItem 
 										title="{StudentBlockData>email}"
 									>
+									<layoutData>
+										<layout:GridData span="XL8 L8 M8 S8" />
+									</layoutData>									
 									</ObjectListItem>
 								</layout:Grid>
 							</layout:BlockLayoutCell>
 						</layout:content>
 					</layout:BlockLayoutRow>
 				</layout:BlockLayout>
-			</ScrollContainer>
+			</content>
+			</Page>
 
 			<!-- <ScrollContainer 
 				height="100%"

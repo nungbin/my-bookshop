@@ -82,7 +82,8 @@ sap.ui.define([
                     if (oAction === 'YES') {
                       //Drop changes which were bound previously using smart table
                       //reference: https://stackoverflow.com/questions/42392802/how-to-undo-user-changes-in-a-form-that-has-been-bound-to-an-odata-model
-                      that.getOwnerComponent().getModel().updateBindings(true);
+                      //that.getOwnerComponent().getModel().updateBindings(true);
+                      that.getOwnerComponent().getModel().refresh();
                       that.getOwnerComponent().getRouter().navTo("RouteRootView");
                     }
                   }
@@ -90,7 +91,8 @@ sap.ui.define([
               }
             }
             else{
-              this.getOwnerComponent().getModel().updateBindings(true);
+              //this.getOwnerComponent().getModel().updateBindings(true);
+              this.getOwnerComponent().getModel().refresh();
               this.getOwnerComponent().getRouter().navTo("RouteRootView");
             }
         },
