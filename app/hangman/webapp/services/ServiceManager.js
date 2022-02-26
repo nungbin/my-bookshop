@@ -6,12 +6,13 @@ sap.ui.define([
 	"use strict";
     var canvas;
     var ctx;
+    var prefix_url = 'http://100.115.92.206:4004';
 
 	return {
         callInitGame: function(me) {
             return new Promise(function(resolve,reject) {
                 var that = me;
-                let url=`/wordlistsrv/initGame()`; //this is a REST API call
+                let url = prefix_url + `/wordlistsrv/initGame()`; //this is a REST API call
     
                 $.ajax({
                     url: url,
@@ -35,7 +36,7 @@ sap.ui.define([
         initNoOfWords: function(me) {
             return new Promise(function(resolve,reject) {
                 var that = me;
-                let url=`/wordlistsrv/getNoOfWords()`; //this is a REST API call
+                let url = prefix_url + `/wordlistsrv/getNoOfWords()`; //this is a REST API call
     
                 $.ajax({
                     url: url,
@@ -59,7 +60,7 @@ sap.ui.define([
         pickRandomWord: function(me) {
             return new Promise(function(resolve,reject) {
                 var that = me;
-                let url=`/wordlistsrv/pickRandomWord()`; //this is a REST API call
+                let url = prefix_url + `/wordlistsrv/pickRandomWord()`; //this is a REST API call
     
                 $.ajax({
                     url: url,
@@ -83,7 +84,7 @@ sap.ui.define([
         returnChosenWord: function(me) {
             return new Promise(function(resolve,reject) {
                 var that = me;
-                let url=`/wordlistsrv/returnChosenWord()`; //this is a REST API call
+                let url = prefix_url + `/wordlistsrv/returnChosenWord()`; //this is a REST API call
     
                 $.ajax({
                     url: url,
@@ -107,7 +108,7 @@ sap.ui.define([
         compareWords: function(enteredWord, me) {
             return new Promise(function(resolve,reject) {
                 var that = me;
-                let url=`/wordlistsrv/compareWords(enteredWord='${enteredWord}')`; //this is a REST API call
+                let url = prefix_url + `/wordlistsrv/compareWords(enteredWord='${enteredWord}')`; //this is a REST API call
     
                 $.ajax({
                     url: url,
