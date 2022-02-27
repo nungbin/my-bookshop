@@ -1,0 +1,159 @@
+{
+  "_version": "1.32.0",
+  "sap.app": {
+    "id": "project2.project2",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "ach": "ach",
+    "dataSources": {
+      "mainService": {
+        "uri": "http://100.115.92.206:4004/v2/mysrvdemoService/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml",
+          "annotations": [
+            "annotation0"
+          ]
+        }
+      },
+      "categoryService": {
+        "uri": "http://100.115.92.206:4004/v2/catalog/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      },
+      "UIControl_alias":{
+				"uri": "model/UIControl.json",
+				"type": "JSON"
+			},
+      "annotation0": {
+        "type": "ODataAnnotation",
+        "uri": "localService/annotation0.xml",
+        "settings": {
+          "localUri": "localService/annotation0.xml"
+        }
+      }
+		}
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://task",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+
+  "sap.ui5": {
+    "flexEnabled": false,
+    "rootView": {
+      "viewName": "project2.project2.view.RootView",
+      "type": "XML",
+      "async": true,
+      "id": "RootView"
+    },
+    "dependencies": {
+			"minUI5Version": "1.96.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {},
+        "sap.f": {},
+        "sap.ui.comp": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "project2.project2.i18n.i18n"
+        }
+      },
+			"": {
+				"dataSource": "mainService",
+				"preload": true
+			},
+      "categoryModel": {
+				"dataSource": "categoryService",
+				"preload": true
+      },
+			"UIControlModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"dataSource": "UIControl_alias",
+        "preload": true
+			}	      
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ],
+			"js": [{
+				"uri": "JS/jspdf.min.js"
+			}, {
+				"uri": "JS/jspdf.plugin.autotable.js"
+			}]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "project2.project2.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteRootView",
+          "pattern": "",
+          "target": "master"
+        },
+        {
+          "name": "detail",
+          "pattern": "detail/{email}",
+          "target": "detail"
+        }        
+      ],
+      "targets": {
+        "master": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Master",
+          "viewName": "MasterGridVersion",
+          "viewLevel": 1
+        },
+        "detail": {
+          "viewType": "XML",
+          "transition": "flip",
+          "viewName": "Detail",
+          "viewLevel": 2
+        }        
+      }
+    }
+  }
+}
